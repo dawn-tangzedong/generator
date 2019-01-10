@@ -36,7 +36,7 @@ mybatis-plus（版本应该是需要在3.0以上）
 		</dependency>
 # 另外还需要文件 base、config 中的文件
 
-包含基类 baseEnitiy，包含常用字段id，creationDate、modificationDate、creationBy、modificationBy、delFlag、status、remakes这些字段生成工具不会自动生成
+包含基类 BaseEntity、DataEntity，包含常用字段id，creationTime、modificationTime、creationBy、modificationBy、delFlag、status、remakes这些字段生成工具不会自动生成
 
 包含mybatis-plus的自动注入器 CommonMetaObjectHandler，对基类字段初始化，status默认初始值为1
 
