@@ -1,0 +1,64 @@
+package ${package}.${moduleName}.controller;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Date;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.service.${className}Service;
+import ${mainPath}.common.base.JsonResultVo;
+import ${mainPath}.common.base.PageVo;
+
+
+/**
+ * @author ${author}
+ * @apiNote WEB端-${comments}控制层
+ * @since ${datetime}
+ */
+@RestController
+@RequestMapping("${moduleName}/${pathName}")
+@Api(description = "WEB端-${comments}")
+public class ${className}Controller {
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    @PostMapping("/list")
+    @ApiOperation(value = "获取${comments}分页列表", response = ${className}.class)
+    public JsonResultVo list(@RequestBody PageVo<${className}> pageVo) {
+        IPage<${className}> page = ${classname}Service.page(pageVo, new QueryWrapper<>(pageVo.getObjCondition()));
+        return JsonResultVo.getSuccessInstance(page);
+    }
+
+    @GetMapping("/info/{${pk.attrname}}")
+    @ApiOperation(value = "获取${comments}信息详情", response = ${className}.class)
+    public JsonResultVo info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
+        return JsonResultVo.getSuccessInstance(${classname}Service.getById(${pk.attrname}));
+    }
+
+    @PostMapping("/save")
+    @ApiOperation(value = "保存${comments}信息")
+    public JsonResultVo save(@RequestBody ${className} ${classname}) {
+        return JsonResultVo.getSuccessInstance(${classname}Service.save(${classname}));
+    }
+
+    @PostMapping("/updateById")
+    @ApiOperation(value = "根据id修改${comments}信息")
+    public JsonResultVo update(@RequestBody ${className} ${classname}) {
+        return JsonResultVo.getSuccessInstance(${classname}Service.updateById(${classname}));
+    }
+
+    @GetMapping("/delete")
+    @ApiOperation(value = "删除${comments}信息")
+    public JsonResultVo delete(@RequestParam ${pk.attrType} ${pk.attrname}) {
+        return JsonResultVo.getSuccessInstance(${classname}Service.removeById(${pk.attrname}));
+    }
+
+}
