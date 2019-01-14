@@ -31,31 +31,36 @@ public class ${className}Controller {
     private ${className}Service ${classname}Service;
 
     @PostMapping("/list")
+    @RequiresPermissions("${moduleName}:${pathName}:read")
     @ApiOperation(value = "获取${comments}分页列表", response = ${className}.class)
     public JsonResultVo list(@RequestBody PageVo<${className}> pageVo) {
         IPage<${className}> page = ${classname}Service.page(pageVo, new QueryWrapper<>(pageVo.getObjCondition()));
         return JsonResultVo.getSuccessInstance(page);
     }
 
-    @GetMapping("/info/{${pk.attrname}}")
+    @GetMapping("/info")
+    @RequiresPermissions("${moduleName}:${pathName}:read")
     @ApiOperation(value = "获取${comments}信息详情", response = ${className}.class)
-    public JsonResultVo info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
+    public JsonResultVo info(@RequestParam ${pk.attrType} ${pk.attrname}) {
         return JsonResultVo.getSuccessInstance(${classname}Service.getById(${pk.attrname}));
     }
 
     @PostMapping("/save")
+    @RequiresPermissions("${moduleName}:${pathName}:create")
     @ApiOperation(value = "保存${comments}信息")
     public JsonResultVo save(@RequestBody ${className} ${classname}) {
         return JsonResultVo.getSuccessInstance(${classname}Service.save(${classname}));
     }
 
     @PostMapping("/updateById")
+    @RequiresPermissions("${moduleName}:${pathName}:update")
     @ApiOperation(value = "根据id修改${comments}信息")
     public JsonResultVo update(@RequestBody ${className} ${classname}) {
         return JsonResultVo.getSuccessInstance(${classname}Service.updateById(${classname}));
     }
 
     @GetMapping("/delete")
+    @RequiresPermissions("${moduleName}:${pathName}:delete")
     @ApiOperation(value = "删除${comments}信息")
     public JsonResultVo delete(@RequestParam ${pk.attrType} ${pk.attrname}) {
         return JsonResultVo.getSuccessInstance(${classname}Service.removeById(${pk.attrname}));
