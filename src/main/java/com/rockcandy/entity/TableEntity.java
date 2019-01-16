@@ -5,8 +5,7 @@ import java.util.List;
 /**
  * 表数据
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
+* @author tangzedong.programmer@gmail.com
  * @date 2016年12月20日 上午12:02:55
  */
 public class TableEntity {

@@ -22,8 +22,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * 代码生成器   工具类
  *
- * @author chenshun
- * @email sunlightcs@gmail.com
+* @author tangzedong.programmer@gmail.com
  * @date 2016年12月19日 下午11:40:24
  */
 public class GenUtils {

@@ -19,8 +19,7 @@ import java.util.Map;
 /**
  * 代码生成器
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
+* @author tangzedong.programmer@gmail.com
  * @date 2016年12月19日 下午9:12:58
  */
 @Controller

@@ -3,8 +3,7 @@ package com.rockcandy.utils;
 /**
  * 自定义异常
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
+* @author tangzedong.programmer@gmail.com
  * @date 2016年10月27日 下午10:11:27
  */
 public class RRException extends RuntimeException {
