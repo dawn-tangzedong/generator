@@ -50,4 +50,9 @@ public class ColumnDO {
      * auto_increment
      */
     private String extra;
+
+    /**
+     * 是否是主键
+     */
+    private String columnKey;
 }

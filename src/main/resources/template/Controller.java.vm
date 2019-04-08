@@ -1,17 +1,18 @@
-package ${package}.${moduleName}.controller;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+package ${package}import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.service.${className}Service;
-import ${mainPath}.common.base.JsonResultVo;
-import ${mainPath}.common.base.PageVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+.${moduleName}.controller;
+    ${package}
+        .${moduleName}.entity.${className};
+    ${package}
+        .${moduleName}.service.${className}Service;
+    ${mainPath}
+        .common.base.JsonResultVo; ${mainPath}.common.base.PageVo;
 
 
 /**

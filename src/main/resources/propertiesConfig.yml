@@ -1,16 +1,22 @@
 properties:
   config:
     # 主路径
-    mainPath: com.dawn.rockcandy
+    mainPath: org.generator.modules
     # 模块包路径
     package: com.dawn.rockcandy.modules
     # 模块名称
-    moduleName: sys
+    moduleName: demo
     # 作者
     author: tangzedong
     # Email
     email: tangzedong.programmer@gmail.com
-    # 表前缀
-    tablePrefix: sys_
-    # 列前缀
+    # 表前缀，多行以逗号分隔开
+    tablePrefix: t_
+    # 列前缀，多行以逗号分隔开
     columnPrefix: c_
+    # 文件输出路径
+    fileOutputPaht: D:\demo
+    # 是否使用swagger注解，默认为true
+    useSwagger: ture
+    # 是否使用shiro权限注解，默认为false
+    userShiro: false

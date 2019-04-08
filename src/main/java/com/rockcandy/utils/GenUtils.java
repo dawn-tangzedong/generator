@@ -1,5 +1,7 @@
 package com.rockcandy.utils;
 
+import com.rockcandy.config.PropertiesConfig;
+import com.rockcandy.config.TemplatePropertiesConfig;
 import com.rockcandy.domain.ColumnDO;
 import com.rockcandy.domain.TableDO;
 import org.apache.commons.configuration.Configuration;
@@ -15,7 +17,11 @@ import org.apache.velocity.app.Velocity;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -23,10 +29,16 @@ import java.util.zip.ZipOutputStream;
  * 代码生成器   工具类
  *
  * @author tangzedong.programmer@gmail.com
- * @date 2016年12月19日 下午11:40:24
+ * @date 2019-4-8 23:14:01
  */
 public class GenUtils {
+    private static PropertiesConfig defaultConfig = SpringContextUtils.getBean(PropertiesConfig.class);
 
+    /**
+     * 获取模板信息
+     *
+     * @return the templates
+     */
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<>();
         templates.add("template/Entity.java.vm");
@@ -44,136 +56,103 @@ public class GenUtils {
     /**
      * 生成代码
      */
-    public static void generatorCode(Map<String, String> table,
-                                     List<Map<String, Object>> columns, ZipOutputStream zip) {
-        //配置信息
-        Configuration config = getConfig();
-        boolean hasBigDecimal = false;
-        //表信息
-        TableDO tableEntity = new TableDO();
-        tableEntity.setTableName(table.get("tableName"));
-        tableEntity.setComments(table.get("tableComment"));
-        //表名转换成Java类名
-        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
-        tableEntity.setClassName(className);
-        tableEntity.setClassname(StringUtils.uncapitalize(className));
-
-        //列信息
-        List<ColumnDO> columsList = new ArrayList<>();
-        for (Map<String, Object> column : columns) {
-            ColumnDO columnEntity = new ColumnDO();
-            columnEntity.setColumnName((String) column.get("columnName"));
-            columnEntity.setIsNullable((String) column.get("isNullable"));
-            columnEntity.setDataType((String) column.get("dataType"));
-            columnEntity.setColumnType((String) column.get("columnType"));
-            columnEntity.setComments((String) column.get("columnComment"));
-            columnEntity.setExtra((String) column.get("extra"));
-            //columnEntity.setCharacterOctetLength(Long.valueOf(column.get("characterOctetLength").toString()));
-            //这里长度可能为空，主要是varchar 或者char类型能查出列的长度
-            if (column.get("characterOctetLength") != null) {
-                columnEntity.setCharacterOctetLength(Long.valueOf(column.get("characterOctetLength").toString()));
-            }
-            //列名转换成Java属性名
-            String attrName = columnToJava(columnEntity.getColumnName());
-            columnEntity.setAttrName(attrName);
-            columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
-
-            //列的数据类型，转换成Java类型
-            String attrType;
-            //如果类型是tinyint并且长度为1的生成Boolean类型的属性
-            if (columnEntity.getColumnType().equals("tinyint(1)")) {
-                attrType = "Boolean";
-            } else {
-                attrType = config.getString(columnEntity.getDataType(), "unknowType");
-            }
-            columnEntity.setAttrType(attrType);
-            if (!hasBigDecimal && attrType.equals("BigDecimal")) {
-                hasBigDecimal = true;
-            }
-            //是否主键
-            if ("PRI".equalsIgnoreCase((String) column.get("columnKey")) && tableEntity.getPk() == null) {
-                tableEntity.setPk(columnEntity);
-            }
-
-            columsList.add(columnEntity);
-        }
-        tableEntity.setColumns(columsList);
-
-        //没主键，则第一个字段为主键
-        if (tableEntity.getPk() == null) {
-            tableEntity.setPk(tableEntity.getColumns().get(0));
-        }
-
+    public static void generatorCode(TableDO table,
+                                     List<ColumnDO> columns, ZipOutputStream zip) {
+        // 处理表数据，并判断是否有bigDecimal属性
+        AtomicBoolean hasBigDecimal = disposeTableInfo(table, columns);
         //设置velocity资源加载器
         Properties prop = new Properties();
         prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(prop);
+        // 封装模板数据
+        TemplatePropertiesConfig config = new TemplatePropertiesConfig(defaultConfig);
+        config.setTableInfo(table);
+        config.setHasBigDecimal(hasBigDecimal.get());
+        VelocityContext velocityContext = new VelocityContext(BeanUtils.bean2Map(config));
+        zip(velocityContext, table, zip);
+    }
 
-        String mainPath = config.getString("mainPath");
-        mainPath = StringUtils.isBlank(mainPath) ? "com.rockcandy.models" : mainPath;
+    private static AtomicBoolean disposeTableInfo(TableDO table, List<ColumnDO> columns) {
+        AtomicBoolean hasBigDecimal = new AtomicBoolean(false);
+        // class名称转化驼峰以及变量名
+        table.setClassName(convertName(table.getTableName(), StringUtils.split(defaultConfig.getTablePrefix(), ",")));
+        table.setClassname(StringUtils.uncapitalize(table.getClassName()));
+        // 列信息处理
+        columns.forEach(column -> {
+            column.setAttrName(convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
+            column.setAttrname(StringUtils.uncapitalize(column.getAttrName()));
+            String attrType;
+            // 我比较喜欢用tinyint(1)作为boolean类型
+            if ("tinyint(1)".equals(column.getColumnType())) {
+                attrType = "Boolean";
+            } else {
+                attrType = getConfig().getString(column.getDataType(), "unknowType");
+            }
+            column.setAttrType(attrType);
+            if (!hasBigDecimal.get() && "BigDecimal".equals(attrType)) {
+                hasBigDecimal.set(true);
+            }
+            //是否主键
+            if ("PRI".equalsIgnoreCase(column.getColumnKey()) && table.getPk() == null) {
+                table.setPk(column);
+            }
+        });
+        table.setColumns(columns);
+        return hasBigDecimal;
+    }
 
-        //封装模板数据
-        Map<String, Object> map = new HashMap<>();
-        map.put("tableName", tableEntity.getTableName());
-        map.put("comments", tableEntity.getComments());
-        map.put("pk", tableEntity.getPk());
-        map.put("className", tableEntity.getClassName());
-        map.put("classname", tableEntity.getClassname());
-        map.put("pathName", tableEntity.getClassname().toLowerCase());
-        map.put("columns", tableEntity.getColumns());
-        map.put("hasBigDecimal", hasBigDecimal);
-        map.put("mainPath", mainPath);
-        map.put("package", config.getString("package"));
-        map.put("moduleName", config.getString("moduleName"));
-        map.put("author", config.getString("author"));
-        map.put("email", config.getString("email"));
-        map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-        VelocityContext context = new VelocityContext(map);
-
+    private static void zip(VelocityContext velocityContext, TableDO table, ZipOutputStream zip) {
         //获取模板列表
         List<String> templates = getTemplates();
         for (String template : templates) {
             //渲染模板
             StringWriter sw = new StringWriter();
             Template tpl = Velocity.getTemplate(template, "UTF-8");
-            tpl.merge(context, sw);
-
+            tpl.merge(velocityContext, sw);
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"))));
+                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, table.getClassName(),
+                        defaultConfig.getPackagePath(), defaultConfig.getModuleName()))));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
-                throw new RRException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
+                throw new RRException("渲染模板失败，表名：" + table.getTableName(), e);
             }
         }
     }
 
 
     /**
-     * 列名转换成Java属性名
+     * 驼峰命令
      */
-    public static String columnToJava(String columnName) {
+    private static String camelCase(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
     /**
-     * 表名转换成Java类名
+     * 数据库表名/列名转换成java类名/属性名，并循环过滤掉 prefix
+     *
+     * @param name     表名
+     * @param prefixes 表名需要过滤的字符串
+     * @return 转换后的结果
      */
-    public static String tableToJava(String tableName, String tablePrefix) {
-        if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replace(tablePrefix, "");
+    private static String convertName(String name, String[] prefixes) {
+        if (prefixes.length > 0) {
+            // 循环遍历，过滤掉 prefix
+            for (String prefix : prefixes) {
+                name = name.replace(prefix, "");
+            }
         }
-        return columnToJava(tableName);
+        return camelCase(name);
     }
 
     /**
      * 获取配置信息
      */
-    public static Configuration getConfig() {
+    private static Configuration getConfig() {
         try {
-            return new PropertiesConfiguration("generator.properties");
+            return new PropertiesConfiguration("mysqlGenerator.properties");
         } catch (ConfigurationException e) {
             throw new RRException("获取配置文件失败，", e);
         }

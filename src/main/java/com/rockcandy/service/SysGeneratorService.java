@@ -48,7 +48,7 @@ public class SysGeneratorService {
             //查询列信息
             List<Map<String, Object>> columns = queryColumns(tableName);
             //生成代码
-            GenUtils.generatorCode(table, columns, zip);
+//            GenUtils.generatorCode(table, columns, zip);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();

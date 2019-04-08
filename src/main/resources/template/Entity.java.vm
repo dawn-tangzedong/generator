@@ -1,16 +1,18 @@
-package ${package}.${moduleName}.domain;
-
-import com.baomidou.mybatisplus.annotation.IdType;
+package ${package}import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;.
-import ${mainPath}.common.base.DataEntity;
+import javax.validation.constraints.NotEmpty;
+
+        .${moduleName}.domain;
+        .
+${mainPath}
+        .common.base.DataEntity;
 #if(${hasBigDecimal})
-import java.math.BigDecimal;
 #end
 
 /**
@@ -26,13 +28,13 @@ private static final long serialVersionUID=1L;
 
 #foreach ($column in $columns)
     #if($column.isNullable == "NO")
-    #if($column.attrType == "String")
-    @NotBlank(message = "${column.comments}不能为空")
-    #else
-    @NotEmpty(message = "${column.comments}不能为空")
+        #if($column.attrType == "String")
+        @NotBlank(message = "${column.comments}不能为空")
+        #else
+        @NotEmpty(message = "${column.comments}不能为空")
+        #end
     #end
-    #end
-    @ApiModelProperty("${column.comments}")
-    private ${column.attrType} ${column.attrname};
-    #end
+@ApiModelProperty("${column.comments}")
+private ${column.attrType} ${column.attrname};
+#end
 }
