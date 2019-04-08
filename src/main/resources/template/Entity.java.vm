@@ -1,18 +1,14 @@
-package ${package}.${moduleName}.entity;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+package ${package}.${moduleName}.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import ${mainPath}.common.base.DataEntity;
-
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;.
+import ${mainPath}.common.base.DataEntity;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
@@ -29,14 +25,6 @@ public class ${className} extends BaseEntity{
 private static final long serialVersionUID=1L;
 
 #foreach ($column in $columns)
-    #if($column.columnName != $pk.columnName
-    && $column.columnName != 'creation_time'
-    && $column.columnName != 'creation_by'
-    && $column.columnName != 'modification_time'
-    && $column.columnName != 'modification_by'
-    && $column.columnName != 'del_flag'
-    && $column.columnName != 'remakes'
-    && $column.columnName != 'status')
     #if($column.isNullable == "NO")
     #if($column.attrType == "String")
     @NotBlank(message = "${column.comments}不能为空")
@@ -46,7 +34,5 @@ private static final long serialVersionUID=1L;
     #end
     @ApiModelProperty("${column.comments}")
     private ${column.attrType} ${column.attrname};
-
     #end
-#end
 }

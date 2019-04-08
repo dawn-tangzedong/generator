@@ -1,0 +1,16 @@
+properties:
+  config:
+    # 主路径
+    mainPath: com.dawn.rockcandy
+    # 模块包路径
+    package: com.dawn.rockcandy.modules
+    # 模块名称
+    moduleName: sys
+    # 作者
+    author: tangzedong
+    # Email
+    email: tangzedong.programmer@gmail.com
+    # 表前缀
+    tablePrefix: sys_
+    # 列前缀
+    columnPrefix: c_

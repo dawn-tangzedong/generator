@@ -27,9 +27,16 @@
 		<commons.configuration.version>1.10</commons.configuration.version>
 		<fastjson.version>1.2.31</fastjson.version>
 		<velocity.version>1.7</velocity.version>
+		<ojdbc6.version>11.2.0.3</ojdbc6.version>
+		<swagger.version>2.7.0</swagger.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -43,6 +50,12 @@
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${mybatis.spring.boot.version}</version>
+		</dependency>
+		<!-- oracle驱动 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>${ojdbc6.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -85,26 +98,15 @@
 			<version>1.16.20</version>
 			<scope>provided</scope>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.baomidou</groupId>-->
-			<!--<artifactId>mybatis-plus</artifactId>-->
-			<!--<version>${mybatisplus.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.baomidou</groupId>-->
-			<!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
-			<!--<version>${mybatisplus.version}</version>-->
-		<!--</dependency>-->
-        <!-- swagger2 rest api start-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
+            <version>${swagger.version}</version>
         </dependency>
 	</dependencies>
 

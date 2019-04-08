@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rockcandy.modules.oracle.dao.OracleGeneratorDao">
+    <!-- FIXME 查询效率不高，三张表联合查询，还有排序以及分页操作 -->
+    <select id="queryList" resultType="map">
+        SELECT
+        tableName,
+        comments,
+        createDate
+        FROM
+        (
+        SELECT
+        t.table_name as tableName,
+        c.comments as comments,
+        o.created AS createDate,
+        ROWNUM rowNumber
+        FROM
+        user_tables t LEFT outer
+        JOIN user_tab_comments c ON t.table_name = c.table_name LEFT outer
+        JOIN user_objects o ON o.object_name = c.table_name
+        WHERE
+        o.object_type = 'TABLE'
+        <if test="tableName != null and tableName.trim() != ''">
+            AND Upper(t.table_name) like Upper('%'||#{tableName}||'%')
+        </if>
+        ORDER BY createDate DESC
+        )
+        WHERE
+        rowNumber BETWEEN #{offset} and #{limit}
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(1) from user_tables
+        <if test="tableName != null and tableName.trim() != ''">
+            AND Upper(t.table_name) like Upper('%'||#{tableName}||'%')
+        </if>
+    </select>
+
+    <select id="queryTable" resultType="map">
+        select table_name tableName, engine, table_comment tableComment, create_time createTime
+        from information_schema.tables
+        where table_schema = (select database())
+          and table_name = #{tableName}
+    </select>
+
+    <select id="queryColumns" resultType="map">
+        select
+            column_name            columnName,
+            data_type              dataType,
+            column_comment         columnComment,
+            column_key             columnKey,
+            is_nullable            isNullable,
+            column_type            columnType,
+            character_octet_length characterOctetLength,
+            extra
+        from information_schema.columns
+        where table_name = #{tableName}
+          and table_schema = (select database())
+        order by ordinal_position
+    </select>
+</mapper>

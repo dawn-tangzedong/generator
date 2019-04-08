@@ -1,28 +1,34 @@
 # Tomcat
 server:
-    tomcat:
-        uri-encoding: UTF-8
-        max-threads: 1000
-        min-spare-threads: 30
-    port: 80
-    servlet:
-        context-path: /generator
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 80
+  servlet:
+    context-path: /generator
 
 # mysql
 spring:
-    datasource:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/database?useUnicode=true&characterEncoding=utf8
-        username: root
-        password: 123456
-    jackson:
-        time-zone: GMT+8
-        date-format: yyyy-MM-dd HH:mm:ss
-    resources:
-            static-locations: classpath:/static/,classpath:/views/
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.3.253:1521/pgis
+    username: PGIS_23W
+    password: PGIS_23W
+  #    MySQL 连接
+  #    type: com.alibaba.druid.pool.DruidDataSource
+  #    driverClassName: com.mysql.jdbc.Driver
+  #    url: jdbc:mysql://tangzedong.com:3306/rockcandy?useUnicode=true&characterEncoding=utf8
+  #    username: rockcandy
+  #    password: rockcandy
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
 
 # Mybatis配置
 mybatis:
-    mapperLocations: classpath:mapper/**/*.xml
+  mapperLocations: classpath:mapper/**/*.xml
 

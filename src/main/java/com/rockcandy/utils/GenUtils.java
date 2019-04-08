@@ -1,7 +1,7 @@
 package com.rockcandy.utils;
 
-import com.rockcandy.entity.ColumnEntity;
-import com.rockcandy.entity.TableEntity;
+import com.rockcandy.domain.ColumnDO;
+import com.rockcandy.domain.TableDO;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -22,7 +22,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * 代码生成器   工具类
  *
-* @author tangzedong.programmer@gmail.com
+ * @author tangzedong.programmer@gmail.com
  * @date 2016年12月19日 下午11:40:24
  */
 public class GenUtils {
@@ -50,7 +50,7 @@ public class GenUtils {
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
         //表信息
-        TableEntity tableEntity = new TableEntity();
+        TableDO tableEntity = new TableDO();
         tableEntity.setTableName(table.get("tableName"));
         tableEntity.setComments(table.get("tableComment"));
         //表名转换成Java类名
@@ -59,9 +59,9 @@ public class GenUtils {
         tableEntity.setClassname(StringUtils.uncapitalize(className));
 
         //列信息
-        List<ColumnEntity> columsList = new ArrayList<>();
+        List<ColumnDO> columsList = new ArrayList<>();
         for (Map<String, Object> column : columns) {
-            ColumnEntity columnEntity = new ColumnEntity();
+            ColumnDO columnEntity = new ColumnDO();
             columnEntity.setColumnName((String) column.get("columnName"));
             columnEntity.setIsNullable((String) column.get("isNullable"));
             columnEntity.setDataType((String) column.get("dataType"));
@@ -70,7 +70,7 @@ public class GenUtils {
             columnEntity.setExtra((String) column.get("extra"));
             //columnEntity.setCharacterOctetLength(Long.valueOf(column.get("characterOctetLength").toString()));
             //这里长度可能为空，主要是varchar 或者char类型能查出列的长度
-            if (column.get("characterOctetLength") != null){
+            if (column.get("characterOctetLength") != null) {
                 columnEntity.setCharacterOctetLength(Long.valueOf(column.get("characterOctetLength").toString()));
             }
             //列名转换成Java属性名
