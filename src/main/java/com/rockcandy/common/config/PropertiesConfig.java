@@ -2,6 +2,8 @@ package com.rockcandy.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
+@PropertySource(value = "classpath:application-config.yml")
 @ConfigurationProperties(prefix = "properties.config")
-@PropertySource("classpath:propertiesConfig.yml")
 public class PropertiesConfig {
     /**
      * 默认的main path 为 org.generator.modules
@@ -26,6 +28,7 @@ public class PropertiesConfig {
     private String tablePrefix;
     private String columnPrefix;
     private String fileOutputPath;
+    private String baseService;
     /**
      * 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
      */
@@ -38,6 +41,6 @@ public class PropertiesConfig {
     /**
      * 数据库 可选值 Mysql，Oracle，默认为Mysql
      */
-    private String sqlTyp = "Mysql";
+    private String sqlType = "Mysql";
 
 }

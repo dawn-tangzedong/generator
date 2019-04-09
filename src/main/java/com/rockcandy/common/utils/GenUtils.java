@@ -7,7 +7,8 @@ import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;
 import com.rockcandy.modules.common.service.GeneratorService;
 import com.rockcandy.modules.mysql.service.MysqlGeneratorService;
-import com.rockcandy.modules.oracle.dao.OracleGeneratorDao;
+import com.rockcandy.modules.oracle.service.OracleGeneratorService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -35,6 +36,7 @@ import java.util.zip.ZipOutputStream;
  * @author tangzedong.programmer@gmail.com
  * @date 2019-4-8 23:14:01
  */
+@Slf4j
 public class GenUtils {
     private static PropertiesConfig defaultConfig = SpringContextUtils.getBean(PropertiesConfig.class);
 
@@ -64,8 +66,7 @@ public class GenUtils {
      * @param columns 表所有的列信息
      * @param zip     压缩包
      */
-    public static void generatorCode(TableDO table,
-                                     List<ColumnDO> columns, ZipOutputStream zip) {
+    public static void generatorCode(TableDO table, List<ColumnDO> columns, ZipOutputStream zip) {
         // 处理表数据，并判断是否有bigDecimal属性
         AtomicBoolean hasBigDecimal = disposeTableInfo(table, columns);
         //设置velocity资源加载器
@@ -93,6 +94,7 @@ public class GenUtils {
         // class名称转化驼峰以及变量名
         table.setUpperClassName(convertName(table.getTableName(), StringUtils.split(defaultConfig.getTablePrefix(), ",")));
         table.setLowerClassName(StringUtils.uncapitalize(table.getUpperClassName()));
+        table.setPathName(table.getLowerClassName().toLowerCase());
         // 列信息处理
         columns.forEach(column -> {
             column.setUpperAttrName(convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
@@ -224,13 +226,13 @@ public class GenUtils {
         return null;
     }
 
-    private void generatorCode() {
+    public static void generatorCode() {
         GeneratorService generatorService;
-        if ("Oracle".equalsIgnoreCase(defaultConfig.getSqlTyp())) {
-//            generatorService = SpringContextUtils.getBean(OracleGeneratorService.class);
-        }else {
-
+        if ("Oracle".equalsIgnoreCase(defaultConfig.getSqlType())) {
+            generatorService = SpringContextUtils.getBean(OracleGeneratorService.class);
+        } else {
             generatorService = SpringContextUtils.getBean(MysqlGeneratorService.class);
         }
+        generatorService.generatorCode();
     }
 }

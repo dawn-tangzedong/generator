@@ -38,4 +38,6 @@ public class TableDO {
      * 表名驼峰命名(第一个字母小写)，如：sys_user =>sysUser
      */
     private String lowerClassName;
+
+    private String pathName;
 }
