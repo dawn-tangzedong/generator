@@ -1,4 +1,4 @@
-package com.rockcandy.common.base;
+package com.rockcandy.modules.common.dao;
 
 import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;

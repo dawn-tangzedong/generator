@@ -4,6 +4,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+/**
+ * @author tangzedong.programmer@gmail.com
+ * @apiNote spring context util
+ * @since 2019/4/9 16:39
+ */
 public class SpringContextUtils implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
@@ -22,4 +27,9 @@ public class SpringContextUtils implements ApplicationContextAware {
     public static <T> T getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
     }
+
+    public static <T> T getBean(String name, Class<T> clazz) {
+        return getApplicationContext().getBean(name, clazz);
+    }
+
 }

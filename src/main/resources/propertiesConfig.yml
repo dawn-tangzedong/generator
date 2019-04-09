@@ -24,3 +24,5 @@ properties:
     generatorTableName: tableName
     # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
     baseService:
+    # 数据库 可选值 Mysql，Oracle，默认为Mysql
+    sqlType: Mysql

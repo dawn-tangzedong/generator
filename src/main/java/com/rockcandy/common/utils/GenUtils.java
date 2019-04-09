@@ -5,6 +5,9 @@ import com.rockcandy.common.config.TemplatePropertiesConfig;
 import com.rockcandy.common.exception.ServiceException;
 import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;
+import com.rockcandy.modules.common.service.GeneratorService;
+import com.rockcandy.modules.mysql.service.MysqlGeneratorService;
+import com.rockcandy.modules.oracle.dao.OracleGeneratorDao;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -88,12 +91,12 @@ public class GenUtils {
     private static AtomicBoolean disposeTableInfo(TableDO table, List<ColumnDO> columns) {
         AtomicBoolean hasBigDecimal = new AtomicBoolean(false);
         // class名称转化驼峰以及变量名
-        table.setClassName(convertName(table.getTableName(), StringUtils.split(defaultConfig.getTablePrefix(), ",")));
-        table.setClassname(StringUtils.uncapitalize(table.getClassName()));
+        table.setUpperClassName(convertName(table.getTableName(), StringUtils.split(defaultConfig.getTablePrefix(), ",")));
+        table.setLowerClassName(StringUtils.uncapitalize(table.getUpperClassName()));
         // 列信息处理
         columns.forEach(column -> {
-            column.setAttrName(convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
-            column.setAttrname(StringUtils.uncapitalize(column.getAttrName()));
+            column.setUpperAttrName(convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
+            column.setLowerAttrName(StringUtils.uncapitalize(column.getUpperAttrName()));
             String attrType;
             // 我比较喜欢用tinyint(1)作为boolean类型
             if ("tinyint(1)".equals(column.getColumnType())) {
@@ -124,7 +127,7 @@ public class GenUtils {
             tpl.merge(velocityContext, sw);
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, table.getClassName(),
+                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, table.getUpperClassName(),
                         defaultConfig.getPackagePath(), defaultConfig.getModuleName()))));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
@@ -219,5 +222,15 @@ public class GenUtils {
         }
 
         return null;
+    }
+
+    private void generatorCode() {
+        GeneratorService generatorService;
+        if ("Oracle".equalsIgnoreCase(defaultConfig.getSqlTyp())) {
+//            generatorService = SpringContextUtils.getBean(OracleGeneratorService.class);
+        }else {
+
+            generatorService = SpringContextUtils.getBean(MysqlGeneratorService.class);
+        }
     }
 }

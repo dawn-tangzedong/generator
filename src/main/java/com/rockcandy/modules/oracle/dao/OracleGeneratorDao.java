@@ -1,6 +1,6 @@
 package com.rockcandy.modules.oracle.dao;
 
-import com.rockcandy.common.base.GeneratorDao;
+import com.rockcandy.modules.common.dao.GeneratorDao;
 
 /**
  * @author tangzedong.programmer@gmail.com

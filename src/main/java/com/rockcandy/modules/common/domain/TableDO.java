@@ -32,10 +32,10 @@ public class TableDO {
     /**
      * 表名驼峰命名(第一个字母大写)，如：sys_user => SysUser
      */
-    private String className;
+    private String upperClassName;
 
     /**
      * 表名驼峰命名(第一个字母小写)，如：sys_user =>sysUser
      */
-    private String classname;
+    private String lowerClassName;
 }

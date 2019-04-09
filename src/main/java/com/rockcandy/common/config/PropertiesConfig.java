@@ -35,5 +35,9 @@ public class PropertiesConfig {
      */
     private boolean useShiro;
     private String generatorTableName;
+    /**
+     * 数据库 可选值 Mysql，Oracle，默认为Mysql
+     */
+    private String sqlTyp = "Mysql";
 
 }
