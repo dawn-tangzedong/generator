@@ -1,4 +1,4 @@
-package com.rockcandy.domain;
+package com.rockcandy.modules.common.domain;
 
 import lombok.Data;
 

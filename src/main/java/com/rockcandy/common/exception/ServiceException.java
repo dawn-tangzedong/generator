@@ -1,4 +1,4 @@
-package com.rockcandy.utils;
+package com.rockcandy.common.exception;
 
 /**
  * 自定义异常
@@ -6,29 +6,29 @@ package com.rockcandy.utils;
  * @author tangzedong.programmer@gmail.com
  * @date 2016年10月27日 下午10:11:27
  */
-public class RRException extends RuntimeException {
+public class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     private String msg;
     private int code = 500;
 
-    public RRException(String msg) {
+    public ServiceException(String msg) {
         super(msg);
         this.msg = msg;
     }
 
-    public RRException(String msg, Throwable e) {
+    public ServiceException(String msg, Throwable e) {
         super(msg, e);
         this.msg = msg;
     }
 
-    public RRException(String msg, int code) {
+    public ServiceException(String msg, int code) {
         super(msg);
         this.msg = msg;
         this.code = code;
     }
 
-    public RRException(String msg, int code, Throwable e) {
+    public ServiceException(String msg, int code, Throwable e) {
         super(msg, e);
         this.msg = msg;
         this.code = code;

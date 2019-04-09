@@ -1,4 +1,4 @@
-package com.rockcandy.utils;
+package com.rockcandy.common.utils;
 
 
 import java.util.LinkedHashMap;

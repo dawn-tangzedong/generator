@@ -22,3 +22,5 @@ properties:
     useShiro: false
     # 需要生成代码的数据库表名称，多表以逗号分隔开，不能为空
     generatorTableName: tableName
+    # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
+    baseService:

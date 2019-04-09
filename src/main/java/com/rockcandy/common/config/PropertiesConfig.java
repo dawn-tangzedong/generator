@@ -1,4 +1,4 @@
-package com.rockcandy.config;
+package com.rockcandy.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,4 +35,5 @@ public class PropertiesConfig {
      */
     private boolean useShiro;
     private String generatorTableName;
+
 }

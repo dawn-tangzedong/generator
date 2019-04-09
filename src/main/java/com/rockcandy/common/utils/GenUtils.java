@@ -1,9 +1,10 @@
-package com.rockcandy.utils;
+package com.rockcandy.common.utils;
 
-import com.rockcandy.config.PropertiesConfig;
-import com.rockcandy.config.TemplatePropertiesConfig;
-import com.rockcandy.domain.ColumnDO;
-import com.rockcandy.domain.TableDO;
+import com.rockcandy.common.config.PropertiesConfig;
+import com.rockcandy.common.config.TemplatePropertiesConfig;
+import com.rockcandy.common.exception.ServiceException;
+import com.rockcandy.modules.common.domain.ColumnDO;
+import com.rockcandy.modules.common.domain.TableDO;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -55,6 +56,10 @@ public class GenUtils {
 
     /**
      * 生成代码
+     *
+     * @param table   表信息
+     * @param columns 表所有的列信息
+     * @param zip     压缩包
      */
     public static void generatorCode(TableDO table,
                                      List<ColumnDO> columns, ZipOutputStream zip) {
@@ -125,7 +130,7 @@ public class GenUtils {
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
-                throw new RRException("渲染模板失败，表名：" + table.getTableName(), e);
+                throw new ServiceException("渲染模板失败，表名：" + table.getTableName(), e);
             }
         }
     }
@@ -162,7 +167,7 @@ public class GenUtils {
         try {
             return new PropertiesConfiguration("mysqlGenerator.properties");
         } catch (ConfigurationException e) {
-            throw new RRException("获取配置文件失败，", e);
+            throw new ServiceException("获取配置文件失败，", e);
         }
     }
 

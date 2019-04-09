@@ -1,4 +1,4 @@
-package com.rockcandy.config;
+package com.rockcandy.common.config;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.rockcandy.common.base;
 
-import com.rockcandy.domain.ColumnDO;
-import com.rockcandy.domain.TableDO;
+import com.rockcandy.modules.common.domain.ColumnDO;
+import com.rockcandy.modules.common.domain.TableDO;
 
 import java.util.List;
 import java.util.Map;

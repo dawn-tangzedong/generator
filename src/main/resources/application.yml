@@ -11,17 +11,12 @@ server:
 # mysql
 spring:
   datasource:
+    # MySQL 连接
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@192.168.3.253:1521/pgis
-    username: PGIS_23W
-    password: PGIS_23W
-  #    MySQL 连接
-  #    type: com.alibaba.druid.pool.DruidDataSource
-  #    driverClassName: com.mysql.jdbc.Driver
-  #    url: jdbc:mysql://tangzedong.com:3306/rockcandy?useUnicode=true&characterEncoding=utf8
-  #    username: rockcandy
-  #    password: rockcandy
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://tangzedong.com:3306/rockcandy?useUnicode=true&characterEncoding=utf8
+    username: rockcandy
+    password: rockcandy
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss

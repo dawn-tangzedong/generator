@@ -1,5 +1,6 @@
-package com.rockcandy.utils;
+package com.rockcandy.common.utils;
 
+import com.rockcandy.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.beans.BeanInfo;
@@ -45,7 +46,7 @@ public class BeanUtils {
             }
         } catch (Exception e) {
             log.error("transform exception", e);
-            throw new RRException("bean to map transform exception");
+            throw new ServiceException("bean to map transform exception");
         }
         return data;
     }

@@ -1,7 +1,7 @@
-package com.rockcandy.config;
+package com.rockcandy.common.config;
 
-import com.rockcandy.domain.TableDO;
-import com.rockcandy.utils.DateUtils;
+import com.rockcandy.modules.common.domain.TableDO;
+import com.rockcandy.common.utils.DateUtils;
 import lombok.Data;
 
 import java.util.Date;

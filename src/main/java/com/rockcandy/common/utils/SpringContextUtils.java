@@ -1,4 +1,4 @@
-package com.rockcandy.utils;
+package com.rockcandy.common.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
