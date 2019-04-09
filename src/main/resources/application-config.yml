@@ -1,3 +1,4 @@
+# 基础配置
 properties:
   config:
     # 主路径
@@ -11,17 +12,17 @@ properties:
     # Email
     email: tangzedong.programmer@gmail.com
     # 需要过滤的表前缀，多行以逗号分隔开
-    tablePrefix: t_
+    tablePrefix: sys_
     # 需要过滤的列前缀，多行以逗号分隔开
     columnPrefix: c_
     # 文件输出路径
     fileOutputPaht: D:\demo
     # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
-    useSwagger: ture
+    useSwagger: true
     # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
     useShiro: false
     # 需要生成代码的数据库表名称，多表以逗号分隔开，不能为空
-    generatorTableName: tableName
+    generatorTableName: sys_menu
     # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
     baseService:
     # 数据库 可选值 Mysql，Oracle，默认为Mysql

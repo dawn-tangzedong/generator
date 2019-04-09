@@ -1,40 +1,41 @@
-package ${package}import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+package ${packagePath}.${moduleName}.entity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-        .${moduleName}.domain;
-        .
-${mainPath}
-        .common.base.DataEntity;
-#if(${hasBigDecimal})
-#end
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import ${mainPath}.common.base.DataEntity;
 
+import java.util.Date;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
 /**
  * @author ${author}
- * @apiNote ${comments}实体类
+ * @apiNote ${tableInfo.comments}实体类
  * @since ${datetime}
  */
 @Data
 @TableName("${tableName}")
-@ApiModel("${comments}")
-public class ${className} extends BaseEntity{
+@ApiModel("${tableInfo.comments}")
+public class ${tableInfo.upperClassName} extends BaseEntity{
 private static final long serialVersionUID=1L;
 
-#foreach ($column in $columns)
+#foreach ($column in ${tableInfo.columns})
     #if($column.isNullable == "NO")
-        #if($column.attrType == "String")
-        @NotBlank(message = "${column.comments}不能为空")
-        #else
-        @NotEmpty(message = "${column.comments}不能为空")
-        #end
+    #if($column.attrType == "String")
+    @NotBlank(message = "${column.comments}不能为空")
+    #else
+    @NotEmpty(message = "${column.comments}不能为空")
     #end
-@ApiModelProperty("${column.comments}")
-private ${column.attrType} ${column.attrname};
-#end
+    #end
+    @ApiModelProperty("${column.comments}")
+    private ${column.attrType} ${column.lowerAttrName};
+    #end
 }

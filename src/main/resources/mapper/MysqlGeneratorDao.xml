@@ -3,7 +3,7 @@
 
 <mapper namespace="com.rockcandy.modules.mysql.dao.MysqlGeneratorDao">
     <select id="queryList" resultType="com.rockcandy.modules.common.domain.TableDO">
-        select table_name tableName, engine, table_comment tableComment, create_time createTime from
+        select table_name tableName, engine, table_comment comments, create_time createTime from
         information_schema.tables
         where table_schema = (select database())
         <if test="tableName != null and tableName.trim() != ''">
@@ -26,7 +26,7 @@
         select
             table_name    as tableName,
             engine,
-            table_comment as tableComment,
+            table_comment as comments,
             create_time   as createTime
         from information_schema.tables
         where table_schema = (select database())
@@ -37,7 +37,7 @@
         select
             column_name            as columnName,
             data_type              as dataType,
-            column_comment         as columnComment,
+            column_comment         as comments,
             column_key             as columnKey,
             is_nullable            as isNullable,
             column_type            as columnType,

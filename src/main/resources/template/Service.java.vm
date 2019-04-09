@@ -1,15 +1,17 @@
-package ${package}import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+package ${packagePath}.${moduleName}.service;
 
-.${moduleName}.service;
-    ${package}
-        .${moduleName}.dao.${className}Dao; ${package}.${moduleName}.entity.${className};
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import ${packagePath}.${moduleName}.dao.${tableInfo.upperClassName}Dao;
+import ${packagePath}.${moduleName}.entity.${tableInfo.upperClassName};
 
 /**
  * @author ${author}
- * @apiNote ${comments}service实现
+ * @apiNote ${tableInfo.comments}service实现
  * @since ${datetime}
  */
-@Service("${classname}Service")
-public class ${className}Service extends ServiceImpl<${className}Dao, ${className}> {
+@Service("${tableInfo.lowerClassName}Service")
+public class ${tableInfo.upperClassName}Service extends ServiceImpl<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
 
 }
