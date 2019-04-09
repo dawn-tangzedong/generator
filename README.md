@@ -16,24 +16,24 @@ swagger（版本可以自定义）
     </dependency>
 lombok（版本可以自定义）
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>  
-			<artifactId>lombok</artifactId>  
-			<version>1.16.20</version>  
-			<scope>provided</scope>  
-		</dependency>
+    <dependency>
+	    <groupId>org.projectlombok</groupId>  
+	    <artifactId>lombok</artifactId>  
+	    <version>1.16.20</version>  
+	    <scope>provided</scope>  
+	</dependency>
 mybatis-plus（版本应该是需要在3.0以上）
 
     <dependency>
-			<groupId>com.baomidou</groupId>  
-			<artifactId>mybatis-plus</artifactId>  
-			<version>3.0.5</version>  
-		</dependency>  
-		<dependency>  
-			<groupId>com.baomidou</groupId>  
-			<artifactId>mybatis-plus-boot-starter</artifactId>  
-			<version>3.0.5</version>  
-		</dependency>
+        <groupId>com.baomidou</groupId>  
+        <artifactId>mybatis-plus</artifactId>  
+        <version>3.0.5</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>com.baomidou</groupId>  
+        <artifactId>mybatis-plus-boot-starter</artifactId>  
+        <version>3.0.5</version>  
+    </dependency>
 # 另外还需要文件 base、config 中的文件
 
 包含基类 BaseEntity、DataEntity，包含常用字段id，creationTime、modificationTime、creationBy、modificationBy、delFlag、status、remakes这些字段生成工具不会自动生成
