@@ -1,4 +1,4 @@
-package com.rockcandy.resouces;///**
+package com.rockcandy.resources;///**
 // * Copyright 2018 人人开源 http://www.renren.io
 // * <p>
 // * Licensed under the Apache License, Version 2.0 (the "License"); you may not

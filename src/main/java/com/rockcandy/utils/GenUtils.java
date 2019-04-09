@@ -72,6 +72,14 @@ public class GenUtils {
         zip(velocityContext, table, zip);
     }
 
+
+    /**
+     * 处理数据库表、列信息
+     *
+     * @param table   数据库表
+     * @param columns 数据库列集合
+     * @return 数据库表结构是否存在bigDecimal数据类型
+     */
     private static AtomicBoolean disposeTableInfo(TableDO table, List<ColumnDO> columns) {
         AtomicBoolean hasBigDecimal = new AtomicBoolean(false);
         // class名称转化驼峰以及变量名

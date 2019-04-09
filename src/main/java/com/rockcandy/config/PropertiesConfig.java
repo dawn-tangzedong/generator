@@ -26,4 +26,13 @@ public class PropertiesConfig {
     private String tablePrefix;
     private String columnPrefix;
     private String fileOutputPath;
+    /**
+     * 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
+     */
+    private boolean useSwagger = true;
+    /**
+     * 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
+     */
+    private boolean useShiro;
+    private String generatorTableName;
 }

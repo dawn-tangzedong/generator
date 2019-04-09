@@ -1,5 +1,8 @@
 package com.rockcandy.common.base;
 
+import com.rockcandy.domain.ColumnDO;
+import com.rockcandy.domain.TableDO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +18,7 @@ public interface GeneratorDao {
      * @param map the params
      * @return the table list
      */
-    List<Map<String, Object>> queryList(Map<String, Object> map);
+    List<TableDO> queryList(Map<String, Object> map);
 
     /**
      * 查询数据库表数据集合总数
@@ -31,7 +34,7 @@ public interface GeneratorDao {
      * @param tableName 过滤条件：表名
      * @return 表结构信息
      */
-    Map<String, String> queryTable(String tableName);
+    TableDO queryTable(String tableName);
 
     /**
      * 查询数据库表列信息
@@ -39,5 +42,5 @@ public interface GeneratorDao {
      * @param tableName 过滤条件：表名
      * @return 列信息集合
      */
-    List<Map<String, Object>> queryColumns(String tableName);
+    List<ColumnDO> queryColumns(String tableName);
 }

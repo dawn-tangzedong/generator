@@ -34,7 +34,7 @@ mybatis-plus（版本应该是需要在3.0以上）
         <artifactId>mybatis-plus-boot-starter</artifactId>  
         <version>3.0.5</version>  
     </dependency>
-# 另外还需要文件 base、config 中的文件
+# 另外你可能还需要文件 java/com/rockcandy/resources 中的文件
 
 包含基类 BaseEntity、DataEntity，包含常用字段id，creationTime、modificationTime、creationBy、modificationBy、delFlag、status、remakes这些字段生成工具不会自动生成
 
