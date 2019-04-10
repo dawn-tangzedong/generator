@@ -14,6 +14,5 @@ public class GeneratorApplication {
     public static void main(String[] args) {
         SpringApplication.run(GeneratorApplication.class, args);
         GenUtils.generatorCode();
-        System.exit(0);
     }
 }

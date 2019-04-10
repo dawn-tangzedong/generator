@@ -1,5 +1,8 @@
 # generator
-java基础代码生成器（在renren开源项目上做了调整），基于mybatis-plus 3.0.5
+java基础代码生成器，基于mybatis-plus 3.0.5，根据配置文件直接生成代码
+
+#启动方式
+GeneratorApplication main方法启动
 
 # 项目需要引入jar包
 swagger（版本可以自定义）
@@ -44,7 +47,7 @@ mybatis-plus（版本应该是需要在3.0以上）
 
 包含mybatis-plus的配置文件 MybatisPlusConfig
 # 需要调整的配置文件
-在generator.properties文件修改你需要调整的信息，比如
+在application.yml 文件中properties.confgi修改你需要调整的信息，比如
 
 tablePrefix 忽略表前缀
 
