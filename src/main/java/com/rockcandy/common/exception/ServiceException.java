@@ -1,10 +1,9 @@
 package com.rockcandy.common.exception;
 
 /**
- * 自定义异常
- *
  * @author tangzedong.programmer@gmail.com
- * @date 2016年10月27日 下午10:11:27
+ * @apiNote 自定义服务器异常
+ * @date 2019-4-10 15:38:07
  */
 public class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;

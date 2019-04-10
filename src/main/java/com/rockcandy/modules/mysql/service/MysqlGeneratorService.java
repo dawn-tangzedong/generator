@@ -23,6 +23,7 @@ public class MysqlGeneratorService extends GeneratorService {
 //        return mysqlGeneratorDao.queryTable(tableName);
 //    }
 //
+//
 //    public List<ColumnDO> queryColumns(String tableName) {
 //        return mysqlGeneratorDao.queryColumns(tableName);
 //    }

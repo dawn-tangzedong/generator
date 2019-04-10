@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.wyying</groupId>
-	<artifactId>wyy-generator</artifactId>
-	<version>1.0.0</version>
+	<artifactId>generator</artifactId>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
-	<description>wyy-generator</description>
+	<description>generator</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

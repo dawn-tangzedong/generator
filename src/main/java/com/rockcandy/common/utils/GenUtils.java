@@ -55,7 +55,7 @@ public class GenUtils {
 //		templates.add("template/Service.java.vm");
 //		templates.add("template/list.html.vm");
 //		templates.add("template/list.js.vm");
-//		templates.add("template/menu.sql.vm");
+		templates.add("template/menu.sql.vm");
         return templates;
     }
 
@@ -135,6 +135,7 @@ public class GenUtils {
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
+
                 throw new ServiceException("渲染模板失败，表名：" + table.getTableName(), e);
             }
         }
