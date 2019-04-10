@@ -1,7 +1,7 @@
 package com.rockcandy.common.config;
 
-import com.rockcandy.modules.common.domain.TableDO;
 import com.rockcandy.common.utils.DateUtils;
+import com.rockcandy.modules.common.domain.TableDO;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,6 +14,11 @@ import java.util.Date;
 @Data
 public class TemplatePropertiesConfig extends PropertiesConfig {
     private TableDO tableInfo;
+    private String baseService;
+    private String baseEntity;
+    private String[] ignoreAttributes;
+    private boolean hasBaseService = false;
+    private boolean hasBaseEntity = true;
     private boolean hasBigDecimal;
     private String datetime = DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN);
 
@@ -23,16 +28,20 @@ public class TemplatePropertiesConfig extends PropertiesConfig {
      * @param propertiesConfig the properties config
      */
     public TemplatePropertiesConfig(PropertiesConfig propertiesConfig) {
-        super.setAuthor(propertiesConfig.getAuthor());
-        super.setColumnPrefix(propertiesConfig.getColumnPrefix());
         super.setEmail(propertiesConfig.getEmail());
-        super.setFileOutputPath(propertiesConfig.getFileOutputPath());
+        super.setAuthor(propertiesConfig.getAuthor());
+        super.setSqlType(propertiesConfig.getSqlType());
+        super.setUseShiro(propertiesConfig.isUseShiro());
         super.setMainPath(propertiesConfig.getMainPath());
+        super.setUseSwagger(propertiesConfig.isUseSwagger());
         super.setModuleName(propertiesConfig.getModuleName());
         super.setPackagePath(propertiesConfig.getPackagePath());
         super.setTablePrefix(propertiesConfig.getTablePrefix());
-        super.setUseShiro(propertiesConfig.isUseShiro());
-        super.setUseSwagger(propertiesConfig.isUseSwagger());
+        super.setColumnPrefix(propertiesConfig.getColumnPrefix());
+        super.setFileOutputPath(propertiesConfig.getFileOutputPath());
+        super.setIgnoreAttribute(propertiesConfig.getIgnoreAttribute());
+        super.setBaseEntityPackage(propertiesConfig.getBaseEntityPackage());
+        super.setBaseServicePackage(propertiesConfig.getBaseServicePackage());
     }
 
 }

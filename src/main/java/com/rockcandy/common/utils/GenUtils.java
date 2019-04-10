@@ -74,13 +74,39 @@ public class GenUtils {
         prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(prop);
         // 封装模板数据
-        TemplatePropertiesConfig config = new TemplatePropertiesConfig(defaultConfig);
-        config.setTableInfo(table);
+        TemplatePropertiesConfig config = disposeConfig();
         config.setHasBigDecimal(hasBigDecimal.get());
+        config.setTableInfo(table);
         VelocityContext velocityContext = new VelocityContext(BeanUtils.bean2Map(config));
         zip(velocityContext, table, zip);
     }
 
+    /**
+     * 封装模板数据
+     *
+     * @return 模板配置数据
+     */
+    private static TemplatePropertiesConfig disposeConfig() {
+        TemplatePropertiesConfig config = new TemplatePropertiesConfig(defaultConfig);
+        // 截取包路径最后一位为服务层基类名称
+        if (StringUtils.isNotBlank(defaultConfig.getBaseServicePackage())) {
+            config.setBaseServicePackage(defaultConfig.getBaseServicePackage().substring(0, defaultConfig.getBaseServicePackage().lastIndexOf(".")));
+            config.setBaseService(defaultConfig.getBaseServicePackage().replace(config.getBaseServicePackage() + ".", ""));
+            config.setHasBaseService(true);
+        }
+        // 截取包路径最后一位为实体类基类名称
+        if (StringUtils.isNotBlank(defaultConfig.getBaseEntityPackage())) {
+            config.setBaseEntityPackage(defaultConfig.getBaseEntityPackage().substring(0, defaultConfig.getBaseEntityPackage().lastIndexOf(".")));
+            config.setBaseEntity(defaultConfig.getBaseEntityPackage().replace(config.getBaseEntityPackage() + ".", ""));
+        } else {
+            config.setHasBaseEntity(true);
+        }
+        // 如果忽略的字段不为空，根据“,”拆分为数组
+        if (StringUtils.isNotBlank(defaultConfig.getIgnoreAttribute())) {
+            config.setIgnoreAttributes(defaultConfig.getIgnoreAttribute().split(","));
+        }
+        return config;
+    }
 
     /**
      * 处理数据库表、列信息

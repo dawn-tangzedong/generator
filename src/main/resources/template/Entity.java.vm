@@ -6,10 +6,12 @@ import javax.validation.constraints.NotEmpty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import ${mainPath}.common.base.DataEntity;
-
 import java.util.Date;
-
+#if(${hasBaseEntity})
+import ${baseEntityPackage}
+#else
+import java.io.Serializable;
+#end
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,10 +24,9 @@ import java.math.BigDecimal;
  * @since ${datetime}
  */
 @Data
-@TableName("${tableName}")
+@TableName("${tableInfo.tableName}")
 @ApiModel("${tableInfo.comments}")
-public class ${tableInfo.upperClassName} extends BaseEntity{
-private static final long serialVersionUID=1L;
+public class ${tableInfo.upperClassName} #if(${hasBaseEntity}) extends ${baseEntity} #else implements Serializable #end{
 
 #foreach ($column in ${tableInfo.columns})
     #if($column.isNullable == "NO")
@@ -35,7 +36,9 @@ private static final long serialVersionUID=1L;
     @NotEmpty(message = "${column.comments}不能为空")
     #end
     #end
+    #if(${useSwagger})
     @ApiModelProperty("${column.comments}")
-    private ${column.attrType} ${column.lowerAttrName};
     #end
+    private ${column.attrType} ${column.lowerAttrName};
+#end
 }

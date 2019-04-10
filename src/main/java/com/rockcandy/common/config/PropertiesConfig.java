@@ -2,8 +2,6 @@ package com.rockcandy.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +26,18 @@ public class PropertiesConfig {
     private String tablePrefix;
     private String columnPrefix;
     private String fileOutputPath;
-    private String baseService;
+    /**
+     * 服务层基类包路径
+     */
+    private String baseServicePackage;
+    /**
+     * 推荐使用resources下{@link BaseEntity}基类，包含id,creationTime,modificationTime,delFlag
+     */
+    private String baseEntityPackage;
+    /**
+     * 使用基类忽略的属性，可以自定义
+     */
+    private String ignoreAttribute;
     /**
      * 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
      */

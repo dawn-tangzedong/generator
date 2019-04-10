@@ -58,12 +58,12 @@ public class GeneratorService<Dao extends GeneratorDao> {
     private void writeDisk(ByteArrayOutputStream zipFile) {
         FileOutputStream zip = null;
         try {
-            zip = new FileOutputStream(propertyConfig.getFileOutputPath() + "/code.zip");
             File dir = new File(propertyConfig.getFileOutputPath());
             // 判断目录是否存在，不存在就创建目录文件
             if (!dir.exists()) {
                 dir.mkdir();
             }
+            zip = new FileOutputStream(propertyConfig.getFileOutputPath() + "/code.zip");
             zip.write(zipFile.toByteArray());
         } catch (Exception e) {
             log.error("文件写入文件失败", e);

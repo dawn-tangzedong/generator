@@ -20,9 +20,4 @@
 //
 //    @ApiModelProperty("备注")
 //    private String remakes;
-//
-//    @ApiModelProperty("删除标识(1删除 0正常)")
-//    @TableField(fill = FieldFill.INSERT)
-//    @TableLogic
-//    private Boolean delFlag;
 //}
