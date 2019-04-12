@@ -2,25 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.rockcandy.modules.mysql.dao.MysqlGeneratorDao">
-    <select id="queryList" resultType="com.rockcandy.modules.common.domain.TableDO">
-        select table_name tableName, engine, table_comment comments, create_time createTime from
-        information_schema.tables
-        where table_schema = (select database())
-        <if test="tableName != null and tableName.trim() != ''">
-            and table_name like concat('%', #{tableName}, '%')
-        </if>
-        order by create_time desc
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
-
-    <select id="queryTotal" resultType="int">
-        select count(1) from information_schema.tables where table_schema = (select database())
-        <if test="tableName != null and tableName.trim() != ''">
-            and table_name like concat('%', #{tableName}, '%')
-        </if>
-    </select>
 
     <select id="queryTable" resultType="com.rockcandy.modules.common.domain.TableDO">
         select

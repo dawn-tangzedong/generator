@@ -11,7 +11,7 @@ import ${baseServicePackage}
 
 /**
  * @author ${author}
- * @apiNote ${tableInfo.comments}service实现
+ * @apiNote $!{tableInfo.comments}service实现
  * @since ${datetime}
  */
 @Service("${tableInfo.lowerClassName}Service")

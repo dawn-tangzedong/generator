@@ -8,15 +8,23 @@ server:
   servlet:
     context-path: /generator
 
-# mysql
+
 spring:
+  profiles:
+    active: config
   datasource:
-    # MySQL 连接
+    # Oracle连接
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://tangzedong.com:3306/rockcandy?useUnicode=true&characterEncoding=utf8
-    username: rockcandy
-    password: rockcandy
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@ip:port/database
+    username: root
+    password: 123456
+    # MySQL 连接
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://ip:port/database?useUnicode=true&characterEncoding=utf8
+#    username: root
+#    password: 123456
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -26,37 +34,3 @@ spring:
 # Mybatis配置
 mybatis:
   mapperLocations: classpath:mapper/**/*.xml
-
-# 基础配置
-properties:
-  config:
-    # 主路径
-    mainPath: org.generator.modules
-    # 模块包路径
-    packagePath: com.dawn.rockcandy.modules
-    # 模块名称
-    moduleName: demo
-    # 作者
-    author: tangzedong
-    # Email
-    email: tangzedong.programmer@gmail.com
-    # 需要过滤的表前缀，多行以逗号分隔开
-    tablePrefix: sys_
-    # 需要过滤的列前缀，多行以逗号分隔开
-    columnPrefix: c_
-    # 文件输出路径
-    fileOutputPath: D:\demo
-    # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
-    useSwagger: true
-    # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
-    useShiro: false
-    # 推荐使用resources下{@link BaseEntity}基类，包含id,creationTime,modificationTime,delFlag
-    baseEntityPackage: com.rockcandy.generator.modules.common.domain.BaseEntity
-    # 使用基类忽略的属性，可以自定义
-    ignoreAttribute: id,creationTime,modificationTime,delFlag
-    # 需要生成代码的数据库表名称，多表以逗号分隔开，不能为空
-    generatorTableName: sys_menu
-    # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
-    baseServicePackage: com.rockcandy.generator.modules.common.service.BaseService
-    # 数据库 可选值 Mysql，Oracle，默认为Mysql
-    sqlType: Mysql

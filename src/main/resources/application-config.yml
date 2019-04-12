@@ -4,7 +4,7 @@ properties:
     # 主路径
     mainPath: org.generator.modules
     # 模块包路径
-    package: com.dawn.rockcandy.modules
+    packagePath: com.dawn.rockcandy.modules
     # 模块名称
     moduleName: demo
     # 作者
@@ -12,18 +12,22 @@ properties:
     # Email
     email: tangzedong.programmer@gmail.com
     # 需要过滤的表前缀，多行以逗号分隔开
-    tablePrefix: sys_
+    tablePrefix: ICS_
     # 需要过滤的列前缀，多行以逗号分隔开
-    columnPrefix: c_
+    columnPrefix:
     # 文件输出路径
-    fileOutputPaht: D:\demo
+    fileOutputPath: D:\demo
     # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
     useSwagger: true
     # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
     useShiro: false
+    # 推荐使用resources下{@link BaseEntity}基类，包含id,creationTime,modificationTime,delFlag
+    baseEntityPackage: com.rockcandy.generator.modules.common.domain.BaseEntity
+    # 使用基类忽略的属性，可以自定义
+    ignoreAttribute: id,creationTime,modificationTime,delFlag
     # 需要生成代码的数据库表名称，多表以逗号分隔开，不能为空
-    generatorTableName: sys_menu
+    generatorTableName: ICS_MESSAGE,ICS_FEEDBACK
     # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
-    baseService:
+    baseServicePackage: com.rockcandy.generator.modules.common.service.BaseService
     # 数据库 可选值 Mysql，Oracle，默认为Mysql
-    sqlType: Mysql
+    sqlType: Oracle

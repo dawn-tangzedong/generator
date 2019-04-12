@@ -1,16 +1,16 @@
 -- 菜单SQL
   INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
-  VALUES ('1', '${tableInfo.comments}', 'modules/${moduleName}/${tableInfo.pathName}.html', NULL, '1', 'fa fa-file-code-o', '6');
+  VALUES ('1', '$!{tableInfo.comments}', 'modules/${moduleName}/${tableInfo.pathName}.html', NULL, '1', 'fa fa-file-code-o', '6');
 
   -- 按钮父菜单ID
   set @parentId = @@identity;
 
   -- 菜单对应按钮SQL
   INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
-  SELECT @parentId, '${tableInfo.comments}查看', null, '${moduleName}:${tableInfo.pathName}:list,${moduleName}:${tableInfo.pathName}:info', '2', null, '6';
+  SELECT @parentId, '$!{tableInfo.comments}查看', null, '${moduleName}:${tableInfo.pathName}:list,${moduleName}:${tableInfo.pathName}:info', '2', null, '6';
   INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
-  SELECT @parentId, '${tableInfo.comments}新增', null, '${moduleName}:${tableInfo.pathName}:save', '2', null, '6';
+  SELECT @parentId, '$!{tableInfo.comments}新增', null, '${moduleName}:${tableInfo.pathName}:save', '2', null, '6';
   INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
-  SELECT @parentId, '${tableInfo.comments}修改', null, '${moduleName}:${tableInfo.pathName}:update', '2', null, '6';
+  SELECT @parentId, '$!{tableInfo.comments}修改', null, '${moduleName}:${tableInfo.pathName}:update', '2', null, '6';
   INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
-  SELECT @parentId, '${tableInfo.comments}删除', null, '${moduleName}:${tableInfo.pathName}:delete', '2', null, '6';
+  SELECT @parentId, '$!{tableInfo.comments}删除', null, '${moduleName}:${tableInfo.pathName}:delete', '2', null, '6';

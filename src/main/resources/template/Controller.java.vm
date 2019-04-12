@@ -18,13 +18,13 @@ import ${mainPath}.common.base.PageVo;
 
 /**
  * @author ${author}
- * @apiNote WEB端-${tableInfo.comments}控制层
+ * @apiNote WEB端-$!{tableInfo.comments}控制层
  * @since ${datetime}
  */
 @RestController
 @RequestMapping("${moduleName}/${tableInfo.pathName}")
 #if(${useSwagger})
-@Api(description = "WEB端-${tableInfo.comments}")
+@Api(description = "WEB端-$!{tableInfo.comments}")
 #end
 public class ${tableInfo.upperClassName}Controller {
 
@@ -36,7 +36,7 @@ public class ${tableInfo.upperClassName}Controller {
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
     #end
     #if(${useSwagger})
-    @ApiOperation(value = "获取${tableInfo.comments}分页列表", response = ${tableInfo.upperClassName}.class)
+    @ApiOperation(value = "获取$!{tableInfo.comments}分页列表", response = ${tableInfo.upperClassName}.class)
     #end
     public JsonResultVo list(@RequestBody PageVo<${tableInfo.upperClassName}> pageVo) {
         IPage<${tableInfo.upperClassName}> page = ${tableInfo.lowerClassName}Service.page(pageVo, new QueryWrapper<>(pageVo.getObjCondition()));
@@ -48,7 +48,7 @@ public class ${tableInfo.upperClassName}Controller {
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
     #end
     #if(${useSwagger})
-    @ApiOperation(value = "获取${tableInfo.comments}信息详情", response = ${tableInfo.upperClassName}.class)
+    @ApiOperation(value = "获取$!{tableInfo.comments}信息详情", response = ${tableInfo.upperClassName}.class)
     #end
     public JsonResultVo info(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.getById(${tableInfo.pk.lowerAttrName}));
@@ -59,7 +59,7 @@ public class ${tableInfo.upperClassName}Controller {
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:create")
     #end
     #if(${useSwagger})
-    @ApiOperation(value = "保存${tableInfo.comments}信息")
+    @ApiOperation(value = "保存$!{tableInfo.comments}信息")
     #end
     public JsonResultVo save(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.save(${tableInfo.lowerClassName}));
@@ -70,7 +70,7 @@ public class ${tableInfo.upperClassName}Controller {
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:update")
     #end
     #if(${useSwagger})
-    @ApiOperation(value = "根据id修改${tableInfo.comments}信息")
+    @ApiOperation(value = "根据id修改$!{tableInfo.comments}信息")
     #end
     public JsonResultVo update(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.updateById(${tableInfo.lowerClassName}));
@@ -81,7 +81,7 @@ public class ${tableInfo.upperClassName}Controller {
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:delete")
     #end
     #if(${useSwagger})
-    @ApiOperation(value = "删除${tableInfo.comments}信息")
+    @ApiOperation(value = "删除$!{tableInfo.comments}信息")
     #end
     public JsonResultVo delete(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.removeById(${tableInfo.pk.lowerAttrName}));

@@ -3,7 +3,6 @@ package com.rockcandy.common.utils;
 import com.rockcandy.common.config.PropertiesConfig;
 import com.rockcandy.common.config.TemplatePropertiesConfig;
 import com.rockcandy.common.exception.ServiceException;
-import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;
 import com.rockcandy.modules.common.service.GeneratorService;
 import com.rockcandy.modules.mysql.service.MysqlGeneratorService;
@@ -14,7 +13,6 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.WordUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -55,28 +53,26 @@ public class GenUtils {
 //		templates.add("template/Service.java.vm");
 //		templates.add("template/list.html.vm");
 //		templates.add("template/list.js.vm");
-		templates.add("template/menu.sql.vm");
+        templates.add("template/menu.sql.vm");
         return templates;
     }
 
     /**
      * 生成代码
      *
-     * @param table   表信息
-     * @param columns 表所有的列信息
-     * @param zip     压缩包
+     * @param table         表信息
+     * @param hasBigDecimal 是否有BigDecimal类型
+     * @param zip           压缩包
      */
-    public static void generatorCode(TableDO table, List<ColumnDO> columns, ZipOutputStream zip) {
-        // 处理表数据，并判断是否有bigDecimal属性
-        AtomicBoolean hasBigDecimal = disposeTableInfo(table, columns);
+    public static void generatorCode(TableDO table, AtomicBoolean hasBigDecimal, ZipOutputStream zip) {
         //设置velocity资源加载器
         Properties prop = new Properties();
         prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(prop);
         // 封装模板数据
         TemplatePropertiesConfig config = disposeConfig();
-        config.setHasBigDecimal(hasBigDecimal.get());
         config.setTableInfo(table);
+        config.setHasBigDecimal(hasBigDecimal.get());
         VelocityContext velocityContext = new VelocityContext(BeanUtils.bean2Map(config));
         zip(velocityContext, table, zip);
     }
@@ -108,43 +104,6 @@ public class GenUtils {
         return config;
     }
 
-    /**
-     * 处理数据库表、列信息
-     *
-     * @param table   数据库表
-     * @param columns 数据库列集合
-     * @return 数据库表结构是否存在bigDecimal数据类型
-     */
-    private static AtomicBoolean disposeTableInfo(TableDO table, List<ColumnDO> columns) {
-        AtomicBoolean hasBigDecimal = new AtomicBoolean(false);
-        // class名称转化驼峰以及变量名
-        table.setUpperClassName(convertName(table.getTableName(), StringUtils.split(defaultConfig.getTablePrefix(), ",")));
-        table.setLowerClassName(StringUtils.uncapitalize(table.getUpperClassName()));
-        table.setPathName(table.getLowerClassName().toLowerCase());
-        // 列信息处理
-        columns.forEach(column -> {
-            column.setUpperAttrName(convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
-            column.setLowerAttrName(StringUtils.uncapitalize(column.getUpperAttrName()));
-            String attrType;
-            // 我比较喜欢用tinyint(1)作为boolean类型
-            if ("tinyint(1)".equals(column.getColumnType())) {
-                attrType = "Boolean";
-            } else {
-                attrType = getConfig().getString(column.getDataType(), "unknowType");
-            }
-            column.setAttrType(attrType);
-            if (!hasBigDecimal.get() && "BigDecimal".equals(attrType)) {
-                hasBigDecimal.set(true);
-            }
-            //是否主键
-            if ("PRI".equalsIgnoreCase(column.getColumnKey()) && table.getPk() == null) {
-                table.setPk(column);
-            }
-        });
-        table.setColumns(columns);
-        return hasBigDecimal;
-    }
-
     private static void zip(VelocityContext velocityContext, TableDO table, ZipOutputStream zip) {
         //获取模板列表
         List<String> templates = getTemplates();
@@ -169,35 +128,11 @@ public class GenUtils {
 
 
     /**
-     * 驼峰命令
-     */
-    private static String camelCase(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
-    }
-
-    /**
-     * 数据库表名/列名转换成java类名/属性名，并循环过滤掉 prefix
-     *
-     * @param name     表名
-     * @param prefixes 表名需要过滤的字符串
-     * @return 转换后的结果
-     */
-    private static String convertName(String name, String[] prefixes) {
-        if (prefixes.length > 0) {
-            // 循环遍历，过滤掉 prefix
-            for (String prefix : prefixes) {
-                name = name.replace(prefix, "");
-            }
-        }
-        return camelCase(name);
-    }
-
-    /**
      * 获取配置信息
      */
-    private static Configuration getConfig() {
+    public static Configuration getConfig(String config) {
         try {
-            return new PropertiesConfiguration("mysqlGenerator.properties");
+            return new PropertiesConfiguration(config);
         } catch (ConfigurationException e) {
             throw new ServiceException("获取配置文件失败，", e);
         }

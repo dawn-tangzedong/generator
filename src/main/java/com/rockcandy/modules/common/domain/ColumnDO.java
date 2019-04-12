@@ -37,7 +37,7 @@ public class ColumnDO {
     /**
      * 字段长度
      */
-    private Long characterOctetLength;
+    private Integer characterOctetLength;
     /**
      * 字段列类型以及长度
      */
