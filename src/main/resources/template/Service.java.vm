@@ -15,6 +15,6 @@ import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
  * @since ${datetime}
  */
 @Service("${tableInfo.lowerClassName}Service")
-public class ${tableInfo.upperClassName}Service extends #if(${hasBaseService}) ${baseService} #else ServiceImpl #end<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
+public class ${tableInfo.upperClassName}Service extends#if(${hasBaseService}) ${baseService} #else ServiceImpl #end<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
 
 }
