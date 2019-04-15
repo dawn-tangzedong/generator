@@ -2,7 +2,6 @@ package ${packagePath}.${moduleName}.controller;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +11,9 @@ import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
 import ${packagePath}.${moduleName}.service.${tableInfo.upperClassName}Service;
 import ${mainPath}.common.base.vo.JsonResultVo;
 import ${mainPath}.common.base.vo.PageVo;
+#if(${useShiro})
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+#end
 
 /**
  * @author ${author}
