@@ -14,11 +14,11 @@ spring:
     active: config
   datasource:
     # Oracle连接
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@ip:port/database
-    username: root
-    password: 123456
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@ip:port/database
+#    username: root
+#    password: 123456
     # MySQL 连接
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    driverClassName: com.mysql.jdbc.Driver
@@ -33,4 +33,4 @@ spring:
 
 # Mybatis配置
 mybatis:
-  mapperLocations: classpath:mapper/**/*.xml
+  mapperLocations: classpath:mapper/*.xml
