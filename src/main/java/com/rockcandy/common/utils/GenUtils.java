@@ -94,7 +94,6 @@ public class GenUtils {
         if (StringUtils.isNotBlank(defaultConfig.getBaseEntityPackage())) {
             config.setBaseEntityPackage(defaultConfig.getBaseEntityPackage().substring(0, defaultConfig.getBaseEntityPackage().lastIndexOf(".")));
             config.setBaseEntity(defaultConfig.getBaseEntityPackage().replace(config.getBaseEntityPackage() + ".", ""));
-        } else {
             config.setHasBaseEntity(true);
         }
         // 如果忽略的字段不为空，根据“,”拆分为数组
@@ -148,7 +147,7 @@ public class GenUtils {
         }
 
         if (template.contains("Entity.java.vm")) {
-            return packagePath + "entity" + File.separator + className + ".java";
+            return packagePath + "domain" + File.separator + className + ".java";
         }
 
         if (template.contains("Dao.java.vm")) {

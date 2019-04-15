@@ -18,7 +18,7 @@ public class TemplatePropertiesConfig extends PropertiesConfig {
     private String baseEntity;
     private String[] ignoreAttributes;
     private boolean hasBaseService = false;
-    private boolean hasBaseEntity = true;
+    private boolean hasBaseEntity = false;
     private boolean hasBigDecimal;
     private String datetime = DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN);
 

@@ -1,8 +1,5 @@
 package ${packagePath}.${moduleName}.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Date;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +10,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
 import ${packagePath}.${moduleName}.service.${tableInfo.upperClassName}Service;
-import ${mainPath}.common.base.JsonResultVo;
-import ${mainPath}.common.base.PageVo;
+import ${mainPath}.common.base.vo.JsonResultVo;
+import ${mainPath}.common.base.vo.PageVo;
 
 /**
  * @author ${author}
@@ -31,58 +28,58 @@ public class ${tableInfo.upperClassName}Controller {
     @Autowired
     private ${tableInfo.upperClassName}Service ${tableInfo.lowerClassName}Service;
 
-    @PostMapping("/list")
-    #if(${useShiro})
+    @GetMapping("/list")
+#if(${useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
-    #end
-    #if(${useSwagger})
+#end
+#if(${useSwagger})
     @ApiOperation(value = "获取$!{tableInfo.comments}分页列表", response = ${tableInfo.upperClassName}.class)
-    #end
-    public JsonResultVo list(@RequestBody PageVo<${tableInfo.upperClassName}> pageVo) {
+#end
+    public JsonResultVo list(PageVo<${tableInfo.upperClassName}> pageVo) {
         IPage<${tableInfo.upperClassName}> page = ${tableInfo.lowerClassName}Service.page(pageVo, new QueryWrapper<>(pageVo.getObjCondition()));
         return JsonResultVo.getSuccessInstance(page);
     }
 
     @GetMapping("/info")
-    #if(${useShiro})
+#if(${useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
-    #end
-    #if(${useSwagger})
+#end
+#if(${useSwagger})
     @ApiOperation(value = "获取$!{tableInfo.comments}信息详情", response = ${tableInfo.upperClassName}.class)
-    #end
+#end
     public JsonResultVo info(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.getById(${tableInfo.pk.lowerAttrName}));
     }
 
     @PostMapping("/save")
-    #if(${useShiro})
+#if(${useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:create")
-    #end
-    #if(${useSwagger})
+#end
+#if(${useSwagger})
     @ApiOperation(value = "保存$!{tableInfo.comments}信息")
-    #end
+#end
     public JsonResultVo save(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.save(${tableInfo.lowerClassName}));
     }
 
-    @PostMapping("/updateById")
-    #if(${useShiro})
+    @PutMapping("/updateById")
+#if(${useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:update")
-    #end
-    #if(${useSwagger})
+#end
+#if(${useSwagger})
     @ApiOperation(value = "根据id修改$!{tableInfo.comments}信息")
-    #end
+#end
     public JsonResultVo update(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.updateById(${tableInfo.lowerClassName}));
     }
 
-    @GetMapping("/delete")
-    #if(${useShiro})
+    @DeleteMapping("/delete")
+#if(${useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:delete")
-    #end
-    #if(${useSwagger})
+#end
+#if(${useSwagger})
     @ApiOperation(value = "删除$!{tableInfo.comments}信息")
-    #end
+#end
     public JsonResultVo delete(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
         return JsonResultVo.getSuccessInstance(${tableInfo.lowerClassName}Service.removeById(${tableInfo.pk.lowerAttrName}));
     }

@@ -49,6 +49,9 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
         for (String tableName : propertyConfig.getGeneratorTableName().split(",")) {
             //查询表信息
             TableDO table = dao.queryTable(tableName);
+            if (table == null) {
+                break;
+            }
             //查询列信息
             List<ColumnDO> columns = dao.queryColumns(tableName);
             //生成代码
