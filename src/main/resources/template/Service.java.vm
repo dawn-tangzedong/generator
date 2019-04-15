@@ -2,7 +2,7 @@ package ${packagePath}.${moduleName}.service;
 
 import org.springframework.stereotype.Service;
 #if(${hasBaseService})
-import ${baseServicePackage}
+import ${baseServicePackage};
 #else
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 #end

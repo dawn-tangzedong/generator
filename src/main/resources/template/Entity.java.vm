@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 #if(${hasBaseEntity})
-import ${baseEntityPackage}
+import ${baseEntityPackage};
 #else
 import java.io.Serializable;
 #end

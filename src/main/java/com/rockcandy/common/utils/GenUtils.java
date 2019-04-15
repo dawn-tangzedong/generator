@@ -86,14 +86,14 @@ public class GenUtils {
         TemplatePropertiesConfig config = new TemplatePropertiesConfig(defaultConfig);
         // 截取包路径最后一位为服务层基类名称
         if (StringUtils.isNotBlank(defaultConfig.getBaseServicePackage())) {
-            config.setBaseServicePackage(defaultConfig.getBaseServicePackage().substring(0, defaultConfig.getBaseServicePackage().lastIndexOf(".")));
-            config.setBaseService(defaultConfig.getBaseServicePackage().replace(config.getBaseServicePackage() + ".", ""));
+            config.setBaseService(defaultConfig.getBaseServicePackage()
+                    .substring(config.getBaseEntityPackage().lastIndexOf(".") + 1, config.getBaseEntityPackage().length()));
             config.setHasBaseService(true);
         }
         // 截取包路径最后一位为实体类基类名称
         if (StringUtils.isNotBlank(defaultConfig.getBaseEntityPackage())) {
-            config.setBaseEntityPackage(defaultConfig.getBaseEntityPackage().substring(0, defaultConfig.getBaseEntityPackage().lastIndexOf(".")));
-            config.setBaseEntity(defaultConfig.getBaseEntityPackage().replace(config.getBaseEntityPackage() + ".", ""));
+            config.setBaseEntity(defaultConfig.getBaseEntityPackage()
+                    .substring(config.getBaseEntityPackage().lastIndexOf(".") + 1, config.getBaseEntityPackage().length()));
             config.setHasBaseEntity(true);
         }
         // 如果忽略的字段不为空，根据“,”拆分为数组
