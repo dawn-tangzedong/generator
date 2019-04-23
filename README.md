@@ -1,10 +1,10 @@
 # generator
 java基础代码生成器，基于mybatis-plus 3.0.5，根据配置文件直接生成代码，现支持Mysql、Oracle数据库生成
 
-##启动方式
+## 启动方式
 GeneratorApplication main方法启动
 
-##配置文件描述
+## 配置文件描述
 resources/template velocity模板，包含代码生成的模板
 
 resources/application.yml 数据库等springboot基础配置
@@ -13,7 +13,7 @@ resources/application-config 代码生成等基础参数配置
 
 **Generator.properties 数据库字段对应生成配置文件
 
-##项目需要引入jar包
+## 项目需要引入jar包
 sagger（版本可以自定义）
 
     <dependency>
