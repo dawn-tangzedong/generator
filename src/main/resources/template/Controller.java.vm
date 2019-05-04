@@ -42,7 +42,7 @@ public class ${tableInfo.upperClassName}Controller {
     @ApiOperation(value = "获取$!{tableInfo.comments}分页列表", response = ${tableInfo.upperClassName}.class)
 #end
     public ${ctrlResultConfig.className} list(@RequestParam(defaultValue = "1") Long current,
-                                              @RequestParam(defaultValue = "10") Long size,${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
+                                   @RequestParam(defaultValue = "10") Long size,${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
         IPage<${tableInfo.upperClassName}> page = ${tableInfo.lowerClassName}Service.page(new Page<>(current,size), new QueryWrapper<>(${tableInfo.lowerClassName}));
 #if(${ctrlResultConfig.exist})
         return ${ctrlResultConfig.getInstance}(page);
