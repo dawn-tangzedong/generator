@@ -2,32 +2,43 @@
 properties:
   config:
     # 主路径
-    mainPath: org.generator.modules
+#    mainPath: com.generator
     # 模块包路径
-    packagePath: com.dawn.rockcandy.modules
+    packagePath: com.generator.main.modules
     # 模块名称
     moduleName: demo
     # 作者
     author: tangzedong
-    # Email
-    email: tangzedong.programmer@gmail.com
     # 需要过滤的表前缀，多行以逗号分隔开
     tablePrefix:
     # 需要过滤的列前缀，多行以逗号分隔开
     columnPrefix:
     # 文件输出路径
     fileOutputPath: D:\demo
-    # 推荐使用resources下{@link BaseEntity}基类，包含id,creationTime,modificationTime,delFlag
-    baseEntityPackage: com.rockcandy.generator.modules.common.domain.BaseEntity
-    # 使用基类忽略的属性，可以自定义
-    ignoreAttribute: id,creationTime,modificationTime,delFlag
-    # 需要生成代码的数据库表名称，多表以逗号分隔开，不能为空
-    generatorTableName: default_table
-    # 服务层的父类，默认为空，如果需要，请指定包路径，生成后自动包含import
-    baseServicePackage:
+    # 使用基类忽略的属性，定以后不生成java bean成员属性
+    ignoreAttributes:
+    # 需要生成代码的数据库表名称，数组
+    generatorTableName:
+      - table1
+      - table2
+      - table3
     # 数据库 可选值 Mysql，Oracle，默认为Mysql
     sqlType: Mysql
-    # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
-    useSwagger: true
-    # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
-    useShiro: false
+    # 常用框架配置使用
+    usualFrameConfig:
+      # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
+      useSwagger: true
+      # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
+      useShiro: false
+    # 服务层基类配置
+    baseServiceConfig:
+      # 服务层的基类包相对路径{eg:com.generator.common.base.BasicService}
+      packageRelativePath:
+    # 实体类基类配置
+    baseEntityConfig:
+      # 实体类的基类类包相对路径{eg:com.generator.common.base.BasicEntity}
+      packageRelativePath:
+    # controller层返回视图对象配置信息
+    ctrlResultConfig:
+      # controller层返回对象视图相对路径{eg:com.generator.common.base.JsonResult}
+      packageRelativePath:
