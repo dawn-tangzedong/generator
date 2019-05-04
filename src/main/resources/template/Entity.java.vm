@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
-#if(${hasBaseEntity})
-import ${baseEntityPackage};
+#if(${baseEntityConfig.exist})
+import ${baseEntityConfig.packageRelativePath};
 #else
 import java.io.Serializable;
 #end
+#if(${usualFrameConfig.useSwagger})
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+#end
 import lombok.Data;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -24,7 +26,7 @@ import java.math.BigDecimal;
 @Data
 @TableName("${tableInfo.tableName}")
 @ApiModel("$!{tableInfo.comments}")
-public class ${tableInfo.upperClassName}#if(${hasBaseEntity}) extends ${baseEntity} #else implements Serializable #end{
+public class ${tableInfo.upperClassName}#if(${baseEntityConfig.className}) extends ${baseEntity} #else implements Serializable #end{
 
 #foreach ($column in ${tableInfo.columns})
 #set($generator = true)
@@ -42,10 +44,11 @@ public class ${tableInfo.upperClassName}#if(${hasBaseEntity}) extends ${baseEnti
 #else
     @TableField(value="${column.columnName}")
 #end
-#if(${useSwagger})
+#if(${usualFrameConfig.useSwagger})
     @ApiModelProperty("$!{column.comments}")
 #end
     private ${column.attrType} ${column.lowerAttrName};
+
 #end
 #end
 

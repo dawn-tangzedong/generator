@@ -46,7 +46,7 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
     public void generatorCode() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        for (String tableName : propertyConfig.getGeneratorTableName().split(",")) {
+        for (String tableName : propertyConfig.getGeneratorTableName()) {
             //查询表信息
             TableDO table = dao.queryTable(tableName);
             if (table == null) {

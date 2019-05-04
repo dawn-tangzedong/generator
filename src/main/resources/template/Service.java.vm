@@ -1,8 +1,8 @@
 package ${packagePath}.${moduleName}.service;
 
 import org.springframework.stereotype.Service;
-#if(${hasBaseService})
-import ${baseServicePackage};
+#if(${baseEntityConfig.exist})
+import ${baseEntityConfig.packageRelativePath};
 #else
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 #end
@@ -14,7 +14,7 @@ import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
  * @apiNote $!{tableInfo.comments}service实现
  * @since ${datetime}
  */
-@Service("${tableInfo.lowerClassName}Service")
-public class ${tableInfo.upperClassName}Service extends#if(${hasBaseService}) ${baseService} #else ServiceImpl #end<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
+@Service
+public class ${tableInfo.upperClassName}Service extends#if(${baseEntityConfig.exist}) ${baseEntityConfig.className}#else ServiceImpl#end<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
 
 }

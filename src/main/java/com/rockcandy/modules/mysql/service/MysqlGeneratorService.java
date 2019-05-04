@@ -1,6 +1,7 @@
 package com.rockcandy.modules.mysql.service;
 
-import com.rockcandy.common.utils.GenUtils;
+import com.alibaba.druid.support.json.JSONUtils;
+import com.rockcandy.common.utils.GeneratorTypeUtils;
 import com.rockcandy.common.utils.NameUtils;
 import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;
@@ -21,20 +22,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Service
 public class MysqlGeneratorService extends GeneratorService<MysqlGeneratorDao> {
 
-
+    /**
+     * 处理数据库列信息
+     * @param table         数据库表
+     * @param columns       数据库列集合
+     * @param hasBigDecimal 是否有bigDecimal数据格式
+     */
     @Override
     protected void disposeColumns(TableDO table, List<ColumnDO> columns, AtomicBoolean hasBigDecimal) {
         columns.forEach(column -> {
             column.setUpperAttrName(NameUtils.convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
             column.setLowerAttrName(StringUtils.uncapitalize(column.getUpperAttrName()));
             String attrType;
-            // 我比较喜欢用tinyint(1)作为boolean类型
+            // 我比较喜欢用tinyint(1)作为boolean类型，然后根据配置文件查找对应数据类型
             if ("tinyint(1)".equals(column.getColumnType())) {
                 attrType = "Boolean";
             } else {
-                attrType = GenUtils.getConfig("mysqlGenerator.properties").getString(column.getDataType(), "unknowType");
+                attrType = GeneratorTypeUtils.Mysql.get(column.getDataType());
+                attrType = attrType == null ? "String" : attrType;
             }
-            column.setAttrType(attrType);
             if (!hasBigDecimal.get() && "BigDecimal".equals(attrType)) {
                 hasBigDecimal.set(true);
             }

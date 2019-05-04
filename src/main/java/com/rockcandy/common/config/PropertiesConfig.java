@@ -1,9 +1,15 @@
 package com.rockcandy.common.config;
 
+import com.rockcandy.common.constants.TypeConstants;
+import com.rockcandy.common.vo.BaseClassConfigVo;
+import com.rockcandy.common.vo.UsualFrameConfigVo;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @author tangzedong.programmer@gmail.com
@@ -14,42 +20,69 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application-config.yml")
 @ConfigurationProperties(prefix = "properties.config")
-public class PropertiesConfig {
+public class PropertiesConfig implements Serializable {
+    private String mainPath = "com.generator.common";
+    private String packagePath = "com.generator.main.modules";
+    private String moduleName = "demo";
+    private String author = "anonymity";
     /**
-     * 默认的main path 为 org.generator.modules
+     * service层基类配置信息
      */
-    private String mainPath = "org.generator.modules";
-    private String packagePath;
-    private String moduleName;
-    private String author;
-    private String email;
+    private BaseClassConfigVo baseServiceConfig = new BaseClassConfigVo();
+    /**
+     * controller层返回视图对象配置信息
+     */
+    private BaseClassConfigVo ctrlResultConfig = new BaseClassConfigVo();
+    /**
+     * domain层基类配置信息
+     */
+    private BaseClassConfigVo baseEntityConfig = new BaseClassConfigVo();
+    /**
+     * 常用框架配置信息
+     */
+    private UsualFrameConfigVo usualFrameConfig = new UsualFrameConfigVo();
+    /**
+     * 表前缀过滤
+     */
     private String tablePrefix;
+    /**
+     * 列前缀过滤
+     */
     private String columnPrefix;
+    /**
+     * 文件输出路径
+     */
     private String fileOutputPath;
-    /**
-     * 服务层基类包路径
-     */
-    private String baseServicePackage;
-    /**
-     * 推荐使用resources下{@link BaseEntity}基类，包含id,creationTime,modificationTime,delFlag
-     */
-    private String baseEntityPackage;
     /**
      * 使用基类忽略的属性，可以自定义
      */
-    private String ignoreAttribute;
+    private String[] ignoreAttributes;
     /**
-     * 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
+     * 需要生成的表名
      */
-    private boolean useSwagger = true;
-    /**
-     * 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
-     */
-    private boolean useShiro;
-    private String generatorTableName;
+    private String[] generatorTableName;
     /**
      * 数据库 可选值 Mysql，Oracle，默认为Mysql
      */
-    private String sqlType = "Mysql";
+    private String sqlType = TypeConstants.Mysql;
 
+    @Override
+    public String toString() {
+        return "PropertiesConfig{" +
+                "mainPath='" + mainPath + '\'' +
+                ", packagePath='" + packagePath + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                ", author='" + author + '\'' +
+                ", baseServiceConfig=" + baseServiceConfig +
+                ", ctrlResultConfig=" + ctrlResultConfig +
+                ", baseEntityConfig=" + baseEntityConfig +
+                ", usualFrameConfig=" + usualFrameConfig +
+                ", tablePrefix='" + tablePrefix + '\'' +
+                ", columnPrefix='" + columnPrefix + '\'' +
+                ", fileOutputPath='" + fileOutputPath + '\'' +
+                ", ignoreAttributes=" + Arrays.toString(ignoreAttributes) +
+                ", generatorTableName=" + Arrays.toString(generatorTableName) +
+                ", sqlType='" + sqlType + '\'' +
+                '}';
+    }
 }

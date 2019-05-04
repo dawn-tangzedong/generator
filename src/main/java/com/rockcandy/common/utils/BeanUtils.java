@@ -1,5 +1,6 @@
 package com.rockcandy.common.utils;
 
+import com.rockcandy.common.constants.ExceptionConstants;
 import com.rockcandy.common.exception.ServiceException;
 import jdk.internal.org.objectweb.asm.TypeReference;
 import lombok.extern.slf4j.Slf4j;
@@ -48,8 +49,7 @@ public class BeanUtils {
                 data.put(key, value);
             }
         } catch (Exception e) {
-            log.error("transform exception", e);
-            throw new ServiceException("bean to map transform exception");
+            throw new ServiceException(ExceptionConstants.Bean2Map);
         }
         return data;
     }

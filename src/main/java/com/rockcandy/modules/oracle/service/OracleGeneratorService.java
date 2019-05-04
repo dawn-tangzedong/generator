@@ -1,6 +1,7 @@
 package com.rockcandy.modules.oracle.service;
 
 import com.rockcandy.common.utils.GenUtils;
+import com.rockcandy.common.utils.GeneratorTypeUtils;
 import com.rockcandy.common.utils.NameUtils;
 import com.rockcandy.modules.common.domain.ColumnDO;
 import com.rockcandy.modules.common.domain.TableDO;
@@ -29,8 +30,6 @@ public class OracleGeneratorService extends GeneratorService<OracleGeneratorDao>
             column.setUpperAttrName(NameUtils.convertName(column.getColumnName(), StringUtils.split(defaultConfig.getColumnPrefix(), ",")));
             column.setLowerAttrName(StringUtils.uncapitalize(column.getUpperAttrName()));
             String attrType;
-            attrType = GenUtils.getConfig(CONFIG).getString(column.getDataType(), "unknowType");
-            column.setAttrType(attrType);
             // 长整型判断
             if (column.getDataType().equals("NUMBER")) {
                 if (column.getCharacterOctetLength().equals(1)) {
@@ -46,7 +45,8 @@ public class OracleGeneratorService extends GeneratorService<OracleGeneratorDao>
                     }
                 }
             } else {
-                attrType = GenUtils.getConfig("oracleGenerator.properties").getString(column.getDataType(), "unknowType");
+                attrType = GeneratorTypeUtils.Oracle.get(column.getDataType());
+                attrType = attrType == null ? "String" : attrType;
             }
             if (column.getColumnName().equals(primaryKey)) {
                 table.setPk(column);
