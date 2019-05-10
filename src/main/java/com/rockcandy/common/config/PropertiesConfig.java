@@ -18,7 +18,6 @@ import java.util.Arrays;
  */
 @Data
 @Component
-@PropertySource(value = "classpath:application-config.yml")
 @ConfigurationProperties(prefix = "properties.config")
 public class PropertiesConfig implements Serializable {
     private String mainPath = "com.generator.common";
