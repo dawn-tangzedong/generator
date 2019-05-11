@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 @Data
 @TableName("${tableInfo.tableName}")
 @ApiModel("$!{tableInfo.comments}")
-public class ${tableInfo.upperClassName}#if(${baseEntityConfig.className}) extends ${baseEntity} #else implements Serializable #end{
+public class ${tableInfo.upperClassName}#if(${baseEntityConfig.exist}) extends ${baseEntityConfig.className} #else implements Serializable #end{
 
 #foreach ($column in ${tableInfo.columns})
 #set($generator = true)
