@@ -1,7 +1,7 @@
 package com.rockcandy.modules.mysql.dao;
 
-import org.apache.ibatis.annotations.Mapper;
 import com.rockcandy.modules.common.dao.GeneratorDao;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author tangzedong.programmer@gmail.com

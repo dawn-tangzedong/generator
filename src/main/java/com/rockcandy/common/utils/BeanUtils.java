@@ -2,16 +2,13 @@ package com.rockcandy.common.utils;
 
 import com.rockcandy.common.constants.ExceptionConstants;
 import com.rockcandy.common.exception.ServiceException;
-import jdk.internal.org.objectweb.asm.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

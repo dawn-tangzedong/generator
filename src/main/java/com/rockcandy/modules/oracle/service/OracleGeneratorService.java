@@ -1,6 +1,5 @@
 package com.rockcandy.modules.oracle.service;
 
-import com.rockcandy.common.utils.GenUtils;
 import com.rockcandy.common.utils.GeneratorTypeUtils;
 import com.rockcandy.common.utils.NameUtils;
 import com.rockcandy.modules.common.domain.ColumnDO;

@@ -1,6 +1,5 @@
 package com.rockcandy.modules.mysql.service;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.rockcandy.common.utils.GeneratorTypeUtils;
 import com.rockcandy.common.utils.NameUtils;
 import com.rockcandy.modules.common.domain.ColumnDO;
