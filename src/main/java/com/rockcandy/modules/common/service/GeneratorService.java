@@ -1,6 +1,7 @@
 package com.rockcandy.modules.common.service;
 
 import com.rockcandy.common.config.PropertiesConfig;
+import com.rockcandy.common.exception.ServiceException;
 import com.rockcandy.common.utils.GenUtils;
 import com.rockcandy.common.utils.NameUtils;
 import com.rockcandy.modules.common.dao.GeneratorDao;
@@ -77,6 +78,9 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
         table.setPathName(table.getLowerClassName().toLowerCase());
         // 列信息处理
         disposeColumns(table, columns, hasBigDecimal);
+        if(table.getPk() == null){
+            throw new ServiceException("数据库表：\""+table.getTableName()+"\"没有指定主键，请指定");
+        }
         return hasBigDecimal;
     }
 
