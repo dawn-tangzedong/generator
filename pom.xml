@@ -8,11 +8,11 @@
 	<packaging>jar</packaging>
 	<description>2.0.0版本，启动方式改为jar包引入，通过工具类直接生成</description>
 
-<!--	<parent>-->
-<!--		<groupId>org.springframework.boot</groupId>-->
-<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
-<!--		<version>2.0.3.RELEASE</version>-->
-<!--	</parent>-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -34,41 +34,41 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</gcontainsroupId>-->
+<!--			<artifactId>spring-boot-starter-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-configuration-processor</artifactId>-->
-<!--			<optional>true</optional>-->
+<!--			<artifactId>spring-boot-starter-web</artifactId>-->
 <!--		</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</gcontainsroupId>-->
-			<!--<artifactId>spring-boot-starter-test</artifactId>-->
-			<!--<scope>test</scope>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${mybatis.spring.boot.version}</version>
 		</dependency>
 		<!-- oracle驱动 -->
-<!--		<dependency>-->
-<!--			<groupId>com.oracle</groupId>-->
-<!--			<artifactId>ojdbc6</artifactId>-->
-<!--			<version>${ojdbc6.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>mysql</groupId>-->
-<!--			<artifactId>mysql-connector-java</artifactId>-->
-<!--			<version>${mysql.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.alibaba</groupId>-->
-<!--			<artifactId>druid</artifactId>-->
-<!--			<version>${druid.version}</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>${ojdbc6.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -120,6 +120,8 @@
 				<configuration>
 					<verbose>true</verbose>
 					<fork>true</fork>
+					<source>8</source>
+					<target>8</target>
 				</configuration>
 			</plugin>
 			<plugin>

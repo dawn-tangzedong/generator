@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: config
+  datasource:
+    # Oracle连接
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@ip:port/database
+#    username: root
+#    password: 123456
+    # MySQL 连接
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.3.253:3306/casemanager?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: dcjt123456
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+# Mybatis配置
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
