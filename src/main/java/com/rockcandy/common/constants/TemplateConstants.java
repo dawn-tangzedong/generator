@@ -11,7 +11,7 @@ public interface TemplateConstants {
     String MapperXml = "template/Dao.xml.vm";
     String Service = "template/Service.java.vm";
     String Controller = "template/Controller.java.vm";
-    String Menu = "template/menu.sql.vm";
+//    String Menu = "template/menu.sql.vm";
 
     String[] Templates = new String[]{
             Entity,
@@ -19,7 +19,7 @@ public interface TemplateConstants {
             MapperXml,
             Service,
             Controller,
-            Menu
+//            Menu
     };
 
 
