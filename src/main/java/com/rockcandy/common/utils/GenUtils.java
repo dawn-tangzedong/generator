@@ -66,24 +66,31 @@ public class GenUtils {
         if (StringUtils.isNotBlank(defaultConfig.getBaseServiceConfig().getPackageRelativePath())) {
             config.getBaseServiceConfig().setExist(true);
             config.getBaseServiceConfig().setClassName(defaultConfig.getBaseServiceConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getBaseServiceConfig().getPackageRelativePath().indexOf(".")));
+                    .substring(defaultConfig.getBaseServiceConfig().getPackageRelativePath().lastIndexOf(".")));
         }
         // 截取包路径最后一位为实体类基类名称
         if (StringUtils.isNotBlank(defaultConfig.getBaseEntityConfig().getPackageRelativePath())) {
             config.getBaseEntityConfig().setExist(true);
             config.getBaseEntityConfig().setClassName(defaultConfig.getBaseEntityConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getBaseEntityConfig().getPackageRelativePath().indexOf(".")));
+                    .substring(defaultConfig.getBaseEntityConfig().getPackageRelativePath().lastIndexOf(".")));
         }
         // 截取包路径最后一位为控制层返回结果对象
         if (StringUtils.isNotBlank(defaultConfig.getCtrlResultConfig().getPackageRelativePath())) {
             config.getCtrlResultConfig().setExist(true);
             config.getCtrlResultConfig().setClassName(defaultConfig.getCtrlResultConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getCtrlResultConfig().getPackageRelativePath().indexOf(".")));
+                    .substring(defaultConfig.getCtrlResultConfig().getPackageRelativePath().lastIndexOf(".")));
         }else {
             config.getCtrlResultConfig().setClassName("Map<String,Object>");
         }
     }
 
+    /**
+     * 生成模版并添加到压缩包
+     *
+     * @param velocityContext 模版的上下文
+     * @param table           表信息
+     * @param zip             压缩包流
+     */
     private static void zip(VelocityContext velocityContext, TableDO table, ZipOutputStream zip) {
         for (String template : TemplateConstants.Templates) {
             //渲染模板
@@ -115,15 +122,13 @@ public class GenUtils {
             case TemplateConstants.Entity:
                 return packagePath.append("domain").append(File.separator).append(className).append(".java").toString();
             case TemplateConstants.Mapper:
-                return packagePath.append("dao").append(File.separator).append(className).append("Dao.java").toString();
+                return packagePath.append("mapper").append(File.separator).append(className).append("Mapper.java").toString();
             case TemplateConstants.Service:
                 return packagePath.append("service").append(File.separator).append(File.separator).append(className).append("Service.java").toString();
             case TemplateConstants.Controller:
                 return packagePath.append("controller").append(File.separator).append(className).append("Controller.java").toString();
             case TemplateConstants.MapperXml:
-                return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Dao.xml";
-            case TemplateConstants.Menu:
-                return className.toLowerCase() + "_menu.sql";
+                return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Mapper.xml";
             default:
                 return null;
         }

@@ -1,10 +1,13 @@
 package com.rockcandy.common.exception;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author tangzedong.programmer@gmail.com
  * @apiNote 自定义服务器异常
  * @date 2019-4-10 15:38:07
  */
+@Slf4j
 public class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
@@ -14,6 +17,11 @@ public class ServiceException extends RuntimeException {
     public ServiceException(String msg) {
         super(msg);
         this.msg = msg;
+        log.error("╔═══════════════════════════════════╗");
+        log.error("║                                   ║");
+        log.error("║    Exception:{} ", msg);
+        log.error("║                                   ║");
+        log.error("╚═══════════════════════════════════╝");
     }
 
     public ServiceException(String msg, Throwable e) {

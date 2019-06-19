@@ -1,8 +1,6 @@
 # 基础配置
 properties:
   config:
-    # 主路径
-#    mainPath: com.generator
     # 模块包路径
     packagePath: com.kenary
     # 模块名称
@@ -17,21 +15,24 @@ properties:
     fileOutputPath: /Users/tangzedong/temp
     # 使用基类忽略的属性，定以后不生成java bean成员属性
     ignoreAttributes:
-      - pk_uuid
-      - f_cdate
-      - f_udate
-      - f_deleted
+      - id
+      - create_date
+      - create_by
+      - update_date
+      - update_by
+      - status
+      - remarks
     # 需要生成代码的数据库表名称，数组
     generatorTableName:
-      - ag_case_management_allocation
+      - ag_case_operation
     # 数据库 可选值 Mysql，Oracle，默认为Mysql
-    sqlType:
+    sqlType: Mysql
     # 常用框架配置使用
     usualFrameConfig:
       # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
       useSwagger: true
       # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
-      useShiro: true
+      useShiro: false
     # 服务层基类配置
     baseServiceConfig:
       # 服务层的基类包相对路径{eg:com.generator.common.base.BasicService}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding=EncodingConstants.Utf8?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="${packagePath}.${moduleName}.dao.${tableInfo.upperClassName}Dao">
+<mapper namespace="${packagePath}.${moduleName}.mapper.${tableInfo.upperClassName}Mapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="${packagePath}.${moduleName}.entity.${tableInfo.upperClassName}" id="${tableInfo.lowerClassName}Map">

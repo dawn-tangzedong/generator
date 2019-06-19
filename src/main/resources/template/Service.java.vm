@@ -6,7 +6,7 @@ import ${baseEntityConfig.packageRelativePath};
 #else
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 #end
-import ${packagePath}.${moduleName}.dao.${tableInfo.upperClassName}Dao;
+import ${packagePath}.${moduleName}.Mapper.${tableInfo.upperClassName}Dao;
 import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
 
 /**
@@ -15,6 +15,6 @@ import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
  * @since ${datetime}
  */
 @Service
-public class ${tableInfo.upperClassName}Service extends#if(${baseEntityConfig.exist}) ${baseEntityConfig.className}#else ServiceImpl#end<${tableInfo.upperClassName}Dao, ${tableInfo.upperClassName}> {
+public class ${tableInfo.upperClassName}Service extends#if(${baseEntityConfig.exist}) ${baseEntityConfig.className}#else ServiceImpl#end<${tableInfo.upperClassName}Mapper, ${tableInfo.upperClassName}> {
 
 }

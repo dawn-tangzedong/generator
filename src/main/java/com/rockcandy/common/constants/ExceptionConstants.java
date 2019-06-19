@@ -11,4 +11,5 @@ public interface ExceptionConstants {
     String ConfigNotFount = "配置文件未找到！";
     String Bean2Map = "对象转化Map失败！";
     String RenderTemplate = "模板渲染失败！";
+    String TableNotFound = "未找到相关表信息";
 }

@@ -1,6 +1,7 @@
 package com.rockcandy.modules.common.service;
 
 import com.rockcandy.common.config.PropertiesConfig;
+import com.rockcandy.common.constants.ExceptionConstants;
 import com.rockcandy.common.exception.ServiceException;
 import com.rockcandy.common.utils.GenUtils;
 import com.rockcandy.common.utils.NameUtils;
@@ -47,17 +48,25 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
     public void generatorCode() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
+        int generatorTableNumber = 0;
         for (String tableName : propertyConfig.getGeneratorTableName()) {
             //查询表信息
             TableDO table = dao.queryTable(tableName);
             if (table == null) {
+                log.warn("未找到表{}", tableName);
                 break;
             }
+            generatorTableNumber++;
             //查询列信息
             List<ColumnDO> columns = dao.queryColumns(tableName);
             //生成代码
             GenUtils.generatorCode(table, disposeTableInfo(table,columns), zip);
         }
+        // 如果没有生成的表格，直接抛出异常，禁止写入文件流
+        if (generatorTableNumber == 0) {
+            throw new ServiceException(ExceptionConstants.TableNotFound);
+        }
+        log.info("生成成功，共计生成{}张表", generatorTableNumber);
         IOUtils.closeQuietly(zip);
         // 把文件流写入磁盘中
         writeDisk(outputStream);

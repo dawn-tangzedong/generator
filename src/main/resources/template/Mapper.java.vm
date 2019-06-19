@@ -1,4 +1,4 @@
-package ${packagePath}.${moduleName}.dao;
+package ${packagePath}.${moduleName}.mapper;
 
 import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @apiNote $!{tableInfo.comments}dao
  * @since  ${datetime}
  */
-public interface ${tableInfo.upperClassName}Dao extends BaseMapper<${tableInfo.upperClassName}> {
+public interface ${tableInfo.upperClassName}Mapper extends BaseMapper<${tableInfo.upperClassName}> {
 
 }

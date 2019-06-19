@@ -6,9 +6,9 @@ package com.rockcandy.common.constants;
  * @since 2019/5/4 22:08
  */
 public interface TemplateConstants {
-    String Entity = "template/Entity.java.vm";
-    String Mapper = "template/Dao.java.vm";
-    String MapperXml = "template/Dao.xml.vm";
+    String Entity = "template/Domain.java.vm";
+    String Mapper = "template/Mapper.java.vm";
+    String MapperXml = "template/Mapper.xml.vm";
     String Service = "template/Service.java.vm";
     String Controller = "template/Controller.java.vm";
 //    String Menu = "template/menu.sql.vm";
