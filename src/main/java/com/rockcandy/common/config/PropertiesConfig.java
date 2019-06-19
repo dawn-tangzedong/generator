@@ -40,6 +40,10 @@ public class PropertiesConfig implements Serializable {
      */
     private UsualFrameConfigVo usualFrameConfig = new UsualFrameConfigVo();
     /**
+     * 乐观锁字段，字段会加入mybatis-plus的@Version注解
+     */
+    private String versionFiled;
+    /**
      * 表前缀过滤
      */
     private String tablePrefix;

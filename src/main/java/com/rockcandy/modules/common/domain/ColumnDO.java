@@ -54,4 +54,8 @@ public class ColumnDO {
      * 列键
      */
     private String columnKey;
+    /**
+     * 是否是版本控制器
+     */
+    private boolean version;
 }

@@ -13,6 +13,8 @@ properties:
     columnPrefix:
     # 文件输出路径
     fileOutputPath: /Users/tangzedong/temp
+    # 乐观锁字段，字段会加入mybatis-plus的@Version注解
+    versionFiled:
     # 使用基类忽略的属性，定以后不生成java bean成员属性
     ignoreAttributes:
       - id
