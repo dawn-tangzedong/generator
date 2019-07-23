@@ -11,9 +11,9 @@ spring:
     # MySQL 连接
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.3.253:3306/casemanager?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/OneForAll?useUnicode=true&characterEncoding=utf8
     username: root
-    password: dcjt123456
+    password: Magic2012
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss

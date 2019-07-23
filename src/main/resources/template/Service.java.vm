@@ -1,7 +1,7 @@
 package ${packagePath}.${moduleName}.service;
 
 import org.springframework.stereotype.Service;
-#if(${baseEntityConfig.exist})
+#if(${baseServiceConfig.exist})
 import ${baseEntityConfig.packageRelativePath};
 #else
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +15,6 @@ import ${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName};
  * @since ${datetime}
  */
 @Service
-public class ${tableInfo.upperClassName}Service extends#if(${baseEntityConfig.exist}) ${baseEntityConfig.className}#else ServiceImpl#end<${tableInfo.upperClassName}Mapper, ${tableInfo.upperClassName}> {
+public class ${tableInfo.upperClassName}Service extends#if(${baseServiceConfig.exist}) ${baseServiceConfig.className}#else ServiceImpl#end<${tableInfo.upperClassName}Mapper, ${tableInfo.upperClassName}> {
 
 }

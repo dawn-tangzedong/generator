@@ -56,6 +56,7 @@ public class GenUtils {
         disposeConfig(config);
         config.setTableInfo(table);
         config.setHasBigDecimal(hasBigDecimal.get());
+
         VelocityContext velocityContext = new VelocityContext(BeanUtils.bean2Map(config));
         zip(velocityContext, table, zip);
     }

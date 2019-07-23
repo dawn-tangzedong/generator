@@ -1,6 +1,6 @@
 package ${packagePath}.${moduleName}.factory;
 
-import ${packagePath}.${moduleName}.service.*;
+import ${packagePath}.modules.${moduleName}.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class ${className}ServiceFactory{
     @Autowired
     public ${className}ServiceFactory(#foreach($table in ${tables})${table.upperClassName}Service ${table.lowerClassName}Service#if($foreach.hasNext),#end#end){
 #foreach($table in ${tables})
-        this.${table.lowerClassName}Service = ${table.lowerClassName}Service;
+        ${className}ServiceFactory.${table.lowerClassName}Service = ${table.lowerClassName}Service;
 #end
     }
 

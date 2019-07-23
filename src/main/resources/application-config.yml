@@ -2,13 +2,13 @@
 properties:
   config:
     # 模块包路径
-    packagePath: com.kenary
+    packagePath: com.dawn.oneforall
     # 模块名称
-    moduleName: caseManage
+    moduleName: spark
     # 作者
     author: tangzedong.programmer@gmail.com
     # 需要过滤的表前缀，多行以逗号分隔开
-    tablePrefix: ag_
+    tablePrefix: spark_
     # 需要过滤的列前缀，多行以逗号分隔开
     columnPrefix:
     # 文件输出路径
@@ -18,15 +18,20 @@ properties:
     # 使用基类忽略的属性，定以后不生成java bean成员属性
     ignoreAttributes:
       - id
-      - create_date
-      - create_by
-      - update_date
-      - update_by
-      - status
-      - remarks
+      - creation_time
+      - modification_time
+      - delete_flag
+      - note
     # 需要生成代码的数据库表名称，数组
     generatorTableName:
-      - ag_case_operation
+      - spark_price
+      - spark_album
+      - spark_basic_info
+      - spark_browse
+      - spark_contact
+      - spark_contact_mark
+      - spark_details_info
+      - spark_experience
     # 数据库 可选值 Mysql，Oracle，默认为Mysql
     sqlType: Mysql
     # 常用框架配置使用
@@ -38,11 +43,11 @@ properties:
     # 服务层基类配置
     baseServiceConfig:
       # 服务层的基类包相对路径{eg:com.generator.common.base.BasicService}
-      packageRelativePath: com.kenary.common.service.BasicService
+      packageRelativePath:
     # 实体类基类配置
     baseEntityConfig:
       # 实体类的基类类包相对路径{eg:com.generator.common.base.BasicEntity}
-      packageRelativePath: com.kenary.common.domain.DataEntity
+      packageRelativePath: com.dawn.oneforall.common.base.domain.DataEntity
     # controller层返回视图对象配置信息
     ctrlResultConfig:
       # controller层返回对象视图相对路径{eg:com.generator.common.base.JsonResult}
