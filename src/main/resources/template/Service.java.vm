@@ -6,8 +6,8 @@ import ${baseEntityConfig.packageRelativePath};
 #else
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 #end
-import ${packagePath}.${moduleName}.Mapper.${tableInfo.upperClassName}Dao;
-import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
+import ${packagePath}.modules.${moduleName}.mapper.${tableInfo.upperClassName}Mapper;
+import ${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName};
 
 /**
  * @author ${author}

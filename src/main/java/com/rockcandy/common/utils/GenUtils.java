@@ -21,6 +21,8 @@ import org.apache.velocity.app.Velocity;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -59,6 +61,32 @@ public class GenUtils {
     }
 
     /**
+     * 生成Service的工厂类
+     *
+     * @param tables 所有的表信息
+     * @param zip    压缩包
+     */
+    public static void generatorServiceFactory(List<TableDO> tables, ZipOutputStream zip) {
+        StringWriter sw = new StringWriter();
+        Template tpl = Velocity.getTemplate(TemplateConstants.ServiceFactory, EncodingConstants.Utf8);
+        Map<String, Object> config = BeanUtils.bean2Map(defaultConfig);
+        config.put("tables", tables);
+        config.put("className", NameUtils.camelCase(defaultConfig.getModuleName()));
+        VelocityContext velocityContext = new VelocityContext(config);
+        tpl.merge(velocityContext, sw);
+        try {
+            //添加到zip
+            zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(TemplateConstants.ServiceFactory,
+                    null, defaultConfig.getPackagePath(), defaultConfig.getModuleName()))));
+            IOUtils.write(sw.toString(), zip, EncodingConstants.Utf8);
+            IOUtils.closeQuietly(sw);
+            zip.closeEntry();
+        } catch (IOException e) {
+            throw new ServiceException(ExceptionConstants.RenderTemplate, e);
+        }
+    }
+
+    /**
      * 封装模板数据，对配置数据进行处理
      */
     private static void disposeConfig(TemplatePropertiesConfig config) {
@@ -66,19 +94,19 @@ public class GenUtils {
         if (StringUtils.isNotBlank(defaultConfig.getBaseServiceConfig().getPackageRelativePath())) {
             config.getBaseServiceConfig().setExist(true);
             config.getBaseServiceConfig().setClassName(defaultConfig.getBaseServiceConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getBaseServiceConfig().getPackageRelativePath().lastIndexOf(".")));
+                    .substring(defaultConfig.getBaseServiceConfig().getPackageRelativePath().lastIndexOf(".") + 1));
         }
         // 截取包路径最后一位为实体类基类名称
         if (StringUtils.isNotBlank(defaultConfig.getBaseEntityConfig().getPackageRelativePath())) {
             config.getBaseEntityConfig().setExist(true);
             config.getBaseEntityConfig().setClassName(defaultConfig.getBaseEntityConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getBaseEntityConfig().getPackageRelativePath().lastIndexOf(".")));
+                    .substring(defaultConfig.getBaseEntityConfig().getPackageRelativePath().lastIndexOf(".") + 1));
         }
         // 截取包路径最后一位为控制层返回结果对象
         if (StringUtils.isNotBlank(defaultConfig.getCtrlResultConfig().getPackageRelativePath())) {
             config.getCtrlResultConfig().setExist(true);
             config.getCtrlResultConfig().setClassName(defaultConfig.getCtrlResultConfig().getPackageRelativePath()
-                    .substring(defaultConfig.getCtrlResultConfig().getPackageRelativePath().lastIndexOf(".")));
+                    .substring(defaultConfig.getCtrlResultConfig().getPackageRelativePath().lastIndexOf(".") + 1));
         }else {
             config.getCtrlResultConfig().setClassName("Map<String,Object>");
         }
@@ -129,6 +157,8 @@ public class GenUtils {
                 return packagePath.append("controller").append(File.separator).append(className).append("Controller.java").toString();
             case TemplateConstants.MapperXml:
                 return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Mapper.xml";
+            case TemplateConstants.ServiceFactory:
+                return packagePath.append("factory").append(File.separator).append(NameUtils.camelCase(moduleName)).append("ServiceFactory.java").toString();
             default:
                 return null;
         }

@@ -34,4 +34,5 @@ public class NameUtils {
     public static String camelCase(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
+
 }

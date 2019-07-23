@@ -11,6 +11,9 @@ public interface TemplateConstants {
     String MapperXml = "template/Mapper.xml.vm";
     String Service = "template/Service.java.vm";
     String Controller = "template/Controller.java.vm";
+
+    String ServiceFactory = "template/ServiceFactory.java.vm";
+
 //    String Menu = "template/menu.sql.vm";
 
     String[] Templates = new String[]{

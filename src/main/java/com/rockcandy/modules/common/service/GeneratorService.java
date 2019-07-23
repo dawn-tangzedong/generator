@@ -18,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.ZipOutputStream;
@@ -48,6 +49,7 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
     public void generatorCode() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
+        List<TableDO> tables = new ArrayList<>();
         int generatorTableNumber = 0;
         for (String tableName : propertyConfig.getGeneratorTableName()) {
             //查询表信息
@@ -59,6 +61,7 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
             generatorTableNumber++;
             //查询列信息
             List<ColumnDO> columns = dao.queryColumns(tableName);
+            tables.add(table);
             //生成代码
             GenUtils.generatorCode(table, disposeTableInfo(table,columns), zip);
         }
@@ -67,6 +70,7 @@ public abstract class GeneratorService<Dao extends GeneratorDao> {
             throw new ServiceException(ExceptionConstants.TableNotFound);
         }
         log.info("生成成功，共计生成{}张表", generatorTableNumber);
+        GenUtils.generatorServiceFactory(tables,zip);
         IOUtils.closeQuietly(zip);
         // 把文件流写入磁盘中
         writeDisk(outputStream);
