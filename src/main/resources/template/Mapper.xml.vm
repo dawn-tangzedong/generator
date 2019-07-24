@@ -4,7 +4,7 @@
 <mapper namespace="${packagePath}.modules.${moduleName}.mapper.${tableInfo.upperClassName}Mapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="${packagePath}.${moduleName}.entity.${tableInfo.upperClassName}" id="${tableInfo.lowerClassName}Map">
+    <resultMap type="${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName}" id="${tableInfo.lowerClassName}Map">
         #foreach($column in ${tableInfo.columns})
         <result property="${column.lowerAttrName}" column="${column.columnName}"/>
         #end

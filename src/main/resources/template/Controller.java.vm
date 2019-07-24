@@ -1,12 +1,13 @@
 package ${packagePath}.${moduleName}.controller;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.dawn.oneforall.common.base.vo.JsonResultVo;
+import com.dawn.oneforall.common.base.dto.PageQueryDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName};
+import ${packagePath}.modules.${moduleName}.factory.${serviceFactory}ServiceFactory;
+import org.springframework.web.bind.annotation.*;
 
 #if(${usualFrameConfig.useShiro})
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -19,8 +20,63 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 @RestController
 @RequestMapping("${moduleName}")
 #if(${usualFrameConfig.useSwagger})
-@Api(tags = "WEB端-$!{tableInfo.comments}")
+@Api(description = "WEB端-$!{tableInfo.comments}")
 #end
 public class ${tableInfo.upperClassName}Controller {
+
+    @GetMapping("/${tableInfo.pathName}")
+#if(${usualFrameConfig.useShiro})
+    @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
+#end
+#if(${usualFrameConfig.useSwagger})
+    @ApiOperation(value = "获取$!{tableInfo.comments}分页列表", response = ${tableInfo.upperClassName}.class)
+#end
+    public JsonResultVo list(PageQueryDTO<${tableInfo.upperClassName}> query) {
+        return JsonResultVo.getSuccessInstance("查询成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.page(query, query.getCondition()));
+    }
+
+    @GetMapping("/${tableInfo.pathName}")
+#if(${usualFrameConfig.useShiro})
+    @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
+#end
+#if(${usualFrameConfig.useSwagger})
+    @ApiOperation(value = "根据id获取$!{tableInfo.comments}信息详情", response = ${tableInfo.upperClassName}.class)
+#end
+    public JsonResultVo info(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
+        return JsonResultVo.getSuccessInstance("查询成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.getById(${tableInfo.pk.lowerAttrName}));
+    }
+
+    @PostMapping("/${tableInfo.pathName}")
+#if(${usualFrameConfig.useShiro})
+    @RequiresPermissions("${moduleName}:${tableInfo.pathName}:create")
+#end
+#if(${usualFrameConfig.useSwagger})
+    @ApiOperation(value = "保存$!{tableInfo.comments}信息")
+#end
+    public JsonResultVo save(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
+        return JsonResultVo.getSuccessInstance("保存成功",${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.save(${tableInfo.lowerClassName}));
+    }
+
+    @PutMapping("/${tableInfo.pathName}")
+#if(${usualFrameConfig.useShiro})
+    @RequiresPermissions("${moduleName}:${tableInfo.pathName}:update")
+#end
+#if(${usualFrameConfig.useSwagger})
+    @ApiOperation(value = "根据id修改$!{tableInfo.comments}信息")
+#end
+    public JsonResultVo update(@RequestBody ${tableInfo.upperClassName} ${tableInfo.lowerClassName}) {
+        return JsonResultVo.getSuccessInstance("修改成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.updateById(${tableInfo.lowerClassName}));
+    }
+
+    @DeleteMapping("/${tableInfo.pathName}/{id}")
+#if(${usualFrameConfig.useShiro})
+    @RequiresPermissions("${moduleName}:${tableInfo.pathName}:delete")
+#end
+#if(${usualFrameConfig.useSwagger})
+    @ApiOperation(value = "根据id删除$!{tableInfo.comments}信息")
+#end
+    public JsonResultVo delete(@PathVariable("${tableInfo.pk.lowerAttrName}") ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
+        return JsonResultVo.getSuccessInstance("删除成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.removeById(${tableInfo.pk.lowerAttrName}));
+    }
 
 }

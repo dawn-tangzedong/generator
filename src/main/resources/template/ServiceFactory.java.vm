@@ -16,7 +16,8 @@ public class ${className}ServiceFactory{
 #end
 
     @Autowired
-    public ${className}ServiceFactory(#foreach($table in ${tables})${table.upperClassName}Service ${table.lowerClassName}Service#if($foreach.hasNext),#end#end){
+    public ${className}ServiceFactory(#foreach($table in ${tables})${table.upperClassName}Service ${table.lowerClassName}Service#if($foreach.hasNext),
+                              #end#end){
 #foreach($table in ${tables})
         ${className}ServiceFactory.${table.lowerClassName}Service = ${table.lowerClassName}Service;
 #end
