@@ -32,7 +32,7 @@ public class ${tableInfo.upperClassName}#if(${baseEntityConfig.exist}) extends $
 #set($generator = true)
 #if(${hasBaseEntity})
 #foreach($ignoreAttribute in ${ignoreAttributes})
-#if($ignoreAttribute == ${column.lowerAttrName})
+#if($ignoreAttribute == ${column.columnName})
 #set($generator = false)
 #break
 #end
