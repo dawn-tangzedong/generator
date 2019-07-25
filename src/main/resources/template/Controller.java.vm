@@ -20,7 +20,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 @RestController
 @RequestMapping("${moduleName}")
 #if(${usualFrameConfig.useSwagger})
-@Api(description = "WEB端-$!{tableInfo.comments}")
+@Api(tags = "WEB端-$!{tableInfo.comments}")
 #end
 public class ${tableInfo.upperClassName}Controller {
 
@@ -35,14 +35,14 @@ public class ${tableInfo.upperClassName}Controller {
         return JsonResultVo.getSuccessInstance("查询成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.page(query, query.getCondition()));
     }
 
-    @GetMapping("/${tableInfo.pathName}")
+    @GetMapping("/${tableInfo.pathName}/{${tableInfo.pk.lowerAttrName}}")
 #if(${usualFrameConfig.useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:read")
 #end
 #if(${usualFrameConfig.useSwagger})
     @ApiOperation(value = "根据id获取$!{tableInfo.comments}信息详情", response = ${tableInfo.upperClassName}.class)
 #end
-    public JsonResultVo info(@RequestParam ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
+    public JsonResultVo info(@PathVariable("${tableInfo.pk.lowerAttrName}") ${tableInfo.pk.attrType} ${tableInfo.pk.lowerAttrName}) {
         return JsonResultVo.getSuccessInstance("查询成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.getById(${tableInfo.pk.lowerAttrName}));
     }
 
@@ -68,7 +68,7 @@ public class ${tableInfo.upperClassName}Controller {
         return JsonResultVo.getSuccessInstance("修改成功", ${serviceFactory}ServiceFactory.${tableInfo.lowerClassName}Service.updateById(${tableInfo.lowerClassName}));
     }
 
-    @DeleteMapping("/${tableInfo.pathName}/{id}")
+    @DeleteMapping("/${tableInfo.pathName}/{${tableInfo.pk.lowerAttrName}}")
 #if(${usualFrameConfig.useShiro})
     @RequiresPermissions("${moduleName}:${tableInfo.pathName}:delete")
 #end
