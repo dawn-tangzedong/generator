@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 #if(${baseEntityConfig.exist})
+import lombok.EqualsAndHashCode;
 import ${baseEntityConfig.packageRelativePath};
 #else
 import java.io.Serializable;
@@ -26,6 +27,7 @@ import java.math.BigDecimal;
 @Data
 @TableName("${tableInfo.tableName}")
 @ApiModel("$!{tableInfo.comments}")
+#if(${baseEntityConfig.exist})@EqualsAndHashCode(callSuper = true)#end
 public class ${tableInfo.upperClassName}#if(${baseEntityConfig.exist}) extends ${baseEntityConfig.className} #else implements Serializable #end{
 
 #foreach ($column in ${tableInfo.columns})

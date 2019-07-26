@@ -1,6 +1,6 @@
 package ${packagePath}.${moduleName}.mapper;
 
-import ${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName};
+import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

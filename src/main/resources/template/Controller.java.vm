@@ -5,8 +5,8 @@ import com.dawn.oneforall.common.base.vo.JsonResultVo;
 import com.dawn.oneforall.common.base.dto.PageQueryDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import ${packagePath}.modules.${moduleName}.domain.${tableInfo.upperClassName};
-import ${packagePath}.modules.${moduleName}.factory.${serviceFactory}ServiceFactory;
+import ${packagePath}.${moduleName}.domain.${tableInfo.upperClassName};
+import ${packagePath}.${moduleName}.factory.${serviceFactory}ServiceFactory;
 import org.springframework.web.bind.annotation.*;
 
 #if(${usualFrameConfig.useShiro})

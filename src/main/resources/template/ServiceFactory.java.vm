@@ -1,6 +1,6 @@
 package ${packagePath}.${moduleName}.factory;
 
-import ${packagePath}.modules.${moduleName}.service.*;
+import ${packagePath}.${moduleName}.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
