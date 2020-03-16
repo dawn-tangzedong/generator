@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>cn.org.cnplo</groupId>
+  <artifactId>plo-utils-generate</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20200314075116</lastUpdated>
+  </versioning>
+</metadata>
