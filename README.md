@@ -35,7 +35,7 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 <repositories>
     <repository>
         <id>gitee-maven</id>
-        <url>https://gitee.com/tangTrain/plo-utils-generate/tree/master/release</url>
+        <url>https://gitee.com/Pitta-Brachyura/plo-utils-generate/tree/master/release</url>
     </repository>
 </repositories>
 <!-- 加载工具jir包 -->
@@ -48,13 +48,13 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 </dependencies>
 ```
 
-2. 下载jar包到本地 [[点击去下载！](https://gitee.com/tangTrain/plo-utils-generate/raw/master/jar/plo-utils-generate-0.0.1-SNAPSHOT.jar)]
+2. 下载jar包到本地 [[点击去下载！](https://gitee.com/Pitta-Brachyura/plo-utils-generate/raw/master/jar/plo-utils-generate-0.0.1-SNAPSHOT.jar)]
 
 ### 使用说明
 
 #### 配置文件说明
 
-新建`application-config.yml`文件在`resources`下。[[了解更多配置信息点这里！](https://gitee.com/tangTrain/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
+新建`application-config.yml`文件在`resources`下。[[了解更多配置信息点这里！](https://gitee.com/Pitta-Brachyura/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
 
 ```yml
 # 这里只描述重要参数
