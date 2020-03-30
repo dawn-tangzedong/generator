@@ -16,7 +16,7 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 
 ✔  支持生成xml/mapper/service/controller/domain/serviceFactory等模块基础java代码`关于serviceFactory是为了解决service之间互相调用，互相依赖注入的问题`
 
-✔  支持自定义domain/mapper/service的基类[[了解更多配置信息点这里！](https://gitee.com/tangTrain/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
+✔  支持自定义domain/mapper/service的基类[[了解更多配置信息点这里！](https://gitee.com/Pitta-Brachyura/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
 
 ✔  支持Mysql、Oracle、SqlServer、PostgreSql等数据库
 
@@ -48,13 +48,13 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 </dependencies>
 ```
 
-2. 下载jar包到本地 [[点击去下载！](https://gitee.com/tangTrain/plo-utils-generate/raw/master/jar/plo-utils-generate-0.0.1-SNAPSHOT.jar)]
+2. 下载jar包到本地 [[点击去下载！](https://gitee.com/Pitta-Brachyura/plo-utils-generate/raw/master/jar/plo-utils-generate-0.0.1-SNAPSHOT.jar)]
 
 ### 使用说明
 
 #### 配置文件说明
 
-新建`application-config.yml`文件在`resources`下。[[了解更多配置信息点这里！](https://gitee.com/tangTrain/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
+新建`application-config.yml`文件在`resources`下。[[了解更多配置信息点这里！](https://gitee.com/Pitta-Brachyura/plo-utils-generate/blob/master/src/main/resources/application-config.yml)]
 
 ```yml
 # 这里只描述重要参数
