@@ -71,9 +71,6 @@ public class ConfigurationUtils {
         if (StringUtils.isBlank(config.getString("password"))) {
             throw new RuntimeException("缺少必要参数:mybatis.password");
         }
-        if (StringUtils.isBlank(config.getString("driver"))) {
-            throw new RuntimeException("缺少必要参数:mybatis.driver");
-        }
         if (StringUtils.isBlank(config.getString("url"))) {
             throw new RuntimeException("缺少必要参数:mybatis.url");
         }

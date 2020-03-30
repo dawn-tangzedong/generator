@@ -142,6 +142,7 @@ public class FileUtils {
      */
     static File getFile(GenerateModuleEnums module, String fileName) throws IOException {
         File dir = new File(FileUtils.getFilePath(module, fileName));
+        System.out.println("输出模块：【" + module.name() + "】,输出路径：【" + dir + "】");
         if (!dir.getParentFile().exists()) {
             dir.getParentFile().mkdirs();
         }

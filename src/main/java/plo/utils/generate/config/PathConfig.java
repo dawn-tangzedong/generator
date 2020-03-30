@@ -80,6 +80,8 @@ public class PathConfig {
     public void setRootPath(String rootPath) {
         if (StringUtils.isBlank(rootPath) || rootPath.equals("/")) {
             this.rootPath = System.getProperty("user.dir");
+        }else{
+            this.rootPath = rootPath;
         }
     }
 }

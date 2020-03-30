@@ -35,7 +35,7 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 <repositories>
 	<repository>
 		<id>gitee-maven</id>
-		<url>https://gitee.com/tangTrain/plo-utils-generate/tree/master/release</url>
+		<url>https://gitee.com/Pitta-Brachyura/plo-utils-generate/tree/master/release</url>
 	</repository>
 </repositories>
 <!-- 加载工具jir包 -->
