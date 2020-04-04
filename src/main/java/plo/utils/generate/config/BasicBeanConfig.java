@@ -36,15 +36,18 @@ public class BasicBeanConfig {
     private BasicBeanDTO mapper;
     private BasicBeanDTO service;
 
+    private static String BASIC_SERVICE = "com.baomidou.mybatisplus.extension.service.impl.ServiceImpl";
+    private static String BASIC_MAPPER = "com.baomidou.mybatisplus.core.mapper.BaseMapper";
+
     /**
      * 初始化函数，初始化service的基类是 Mybatis-Plus的ServiceImpl
      */
     private void init() {
         if (StringUtils.isBlank(this.basicService)) {
-            BasicBeanConfig.analyze("com.baomidou.mybatisplus.extension.service.impl.ServiceImpl", this.service = new BasicBeanDTO());
+            BasicBeanConfig.analyze(BASIC_SERVICE, this.service = new BasicBeanDTO());
         }
         if (StringUtils.isBlank(this.basicMapper)) {
-            BasicBeanConfig.analyze("com.baomidou.mybatisplus.core.mapper.BaseMapper", this.mapper = new BasicBeanDTO());
+            BasicBeanConfig.analyze(BASIC_MAPPER, this.mapper = new BasicBeanDTO());
         }
     }
 
@@ -72,10 +75,10 @@ public class BasicBeanConfig {
     }
 
     public void setBasicMapper(String basicMapper) {
-        analyze(basicMapper, this.mapper = new BasicBeanDTO());
+        analyze(StringUtils.isBlank(basicMapper) ? BASIC_MAPPER : basicMapper, this.mapper = new BasicBeanDTO());
     }
 
     public void setBasicService(String basicService) {
-        analyze(basicService, this.service = new BasicBeanDTO());
+        analyze(StringUtils.isBlank(basicService) ? BASIC_SERVICE : basicService, this.service = new BasicBeanDTO());
     }
 }
