@@ -33,18 +33,18 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 ```xml
 <!-- 需要指定gitee仓库，和dependencies同级别 -->
 <repositories>
-	<repository>
-		<id>gitee-maven</id>
-		<url>https://gitee.com/Pitta-Brachyura/plo-utils-generate/tree/master/release</url>
-	</repository>
+    <repository>
+        <id>gitee-maven</id>
+        <url>https://gitee.com/Pitta-Brachyura/plo-utils-generate/tree/master/release</url>
+    </repository>
 </repositories>
 <!-- 加载工具jir包 -->
 <dependencies>
-  <dependency>
-		<groupId>cn.org.cnplo</groupId>
-		<artifactId>plo-utils-generate</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
+    <dependency>
+        <groupId>cn.org.cnplo</groupId>
+        <artifactId>plo-utils-generate</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 </dependencies>
 ```
 
