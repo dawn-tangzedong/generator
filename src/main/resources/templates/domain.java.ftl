@@ -48,7 +48,7 @@ public class ${table.upperClassName} <#if basicBeanConfig.domain??>extends ${bas
     <#if column.version>
     @Version
     </#if>
-    <#if column.version>
+    <#if column.delFlag>
     @TableLogic
     </#if>
     <#-- 判断是否是主键 -->

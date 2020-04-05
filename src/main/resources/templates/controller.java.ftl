@@ -20,7 +20,7 @@ import ${packagePath.servicePath}.${table.upperClassName}Service;
 @Api("${table.comment}控制层")
 </#if>
 @RestController
-@RequestMapping("${pathConfig.moduleName}/${table.lowerClassname}")
+@RequestMapping("/${pathConfig.moduleName}/${table.lowerClassname}")
 <#-- 类 -->
 public class ${table.upperClassName}Controller{
 
