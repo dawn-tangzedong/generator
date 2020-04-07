@@ -10,19 +10,21 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if table.hasBigDecimal>
-import java.math.BigDecimal
+import java.math.BigDecimal;
 </#if>
 <#if table.hasVersion>
 import com.baomidou.mybatisplus.annotation.Version;
 </#if>
 <#if table.hasDelFlag>
-import com.baomidou.mybatisplus.annotation.TableLogic
+import com.baomidou.mybatisplus.annotation.TableLogic;
 </#if>
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 /**
  * @author ${systemConfig.author}
@@ -33,7 +35,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 <#if systemConfig.swagger>
-@TableName("t_account")
+@TableName("${table.name}")
 @ApiModel("${table.comment}实体")
 </#if>
 public class ${table.upperClassName} <#if basicBeanConfig.domain??>extends ${basicBeanConfig.domain.className}</#if>{

@@ -47,4 +47,8 @@ public class GenerateUtils {
             FreeMarkerUtils.generateCommentModule(tables, GenerateModuleEnums.ServiceFactory);
         }
     }
+
+    public static void main(String[] args) {
+        generate();
+    }
 }
