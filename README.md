@@ -28,7 +28,7 @@ java工具包：可支持自动生成xml/mapper/service/controller/domain/servic
 
 ### 安装教程
 
-1. maven项目加载到本地项目中`请在正式版本发布时删除该仓库`
+1. maven项目加载到本地项目中`引入本仓库可能导致你的项目无法正常启动，删除即可！``请在正式版本发布时删除该仓库`
 
 ```xml
 <!-- 需要指定gitee仓库，和dependencies同级别 -->
