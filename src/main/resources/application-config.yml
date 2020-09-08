@@ -1,54 +1,82 @@
-# 基础配置
-properties:
-  config:
-    # 模块包路径
-    packagePath: com.dawn.oneforall
-    # 模块名称
-    moduleName: spark
-    # 作者
-    author: tangzedong.programmer@gmail.com
-    # 需要过滤的表前缀，多行以逗号分隔开
-    tablePrefix: spark_
-    # 需要过滤的列前缀，多行以逗号分隔开
-    columnPrefix:
-    # 文件输出路径
-    fileOutputPath: /Users/tangzedong/temp
-    # 乐观锁字段，字段会加入mybatis-plus的@Version注解
-    versionFiled:
-    # 使用基类忽略的属性，定以后不生成java bean成员属性
-    ignoreAttributes:
-      - id
-      - creation_time
-      - modification_time
-      - delete_flag
-      - note
-    # 需要生成代码的数据库表名称，数组
-    generatorTableName:
-      - spark_price
-      - spark_album
-      - spark_basic_info
-      - spark_browse
-      - spark_contact
-      - spark_contact_mark
-      - spark_details_info
-      - spark_experience
-    # 数据库 可选值 Mysql，Oracle，默认为Mysql
-    sqlType: Mysql
-    # 常用框架配置使用
-    usualFrameConfig:
-      # 是否使用swagger注解，默认为true，会在Domain以及Controller层加上swagger相关注解
-      useSwagger: true
-      # 是否使用shiro安全校验注解，默认为false，会在controller层上加上shiro相关注解
-      useShiro: false
-    # 服务层基类配置
-    baseServiceConfig:
-      # 服务层的基类包相对路径{eg:com.generator.common.base.BasicService}
-      packageRelativePath:
-    # 实体类基类配置
-    baseEntityConfig:
-      # 实体类的基类类包相对路径{eg:com.generator.common.base.BasicEntity}
-      packageRelativePath: com.dawn.oneforall.common.base.domain.DataEntity
-    # controller层返回视图对象配置信息
-    ctrlResultConfig:
-      # controller层返回对象视图相对路径{eg:com.generator.common.base.JsonResult}
-      packageRelativePath:
+# 系统配置
+system:
+  # 开发者
+  author: tangzedong.programmer@gmail.com
+  # 是否使用spring cache注解
+  spring-cache: false
+  # 是否使用swagger2注解
+  swagger: false
+  # 生成指定模块
+  # 不指定的时候为生成所有
+  # 可选择值：Domain/Mapper/Service/Factory/Controller/XML
+  modules:
+# 基类配置
+basic:
+  # domain基类【需包含包完整路径】
+  # 无默认值
+  basic-domain:
+  # mapper基类【需包含包完整路径】
+  # 默认为mybatis-plus的mapper基类
+  # 默认值：com.baomidou.mybatisplus.core.mapper.BaseMapper;
+  basic-mapper:
+  # service基类【需包含包完整路径】
+  # 默认为mybatis-plus的service基类
+  # 默认值：com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+  basic-service:
+
+# 数据库相关配置
+database:
+  # 表前缀过滤，支持多过滤条件
+  table-prefix:
+    -
+  # 列前缀过滤，支持多过滤条件
+  column-prefix:
+    -
+  # 【！必须参数】生成表名称，支持多表同时生成
+  generator-table-name:
+    -
+  # 使用基类忽略的属性，支持多过滤条件
+  ignore-attributes:
+  # 版本的字段，匹配字段会使用Mybaits-plus的@Version注解
+  version:
+  # 版本的字段，匹配字段会使用Mybaits-plus的@TableLogic注解
+  del-flag:
+  # 方言，仅支持Mysql、Oracle、SqlServer、PostgreSql
+  # 默认值：Mysql
+  dialect: Mysql
+
+#路径配置
+path:
+  # 项目路径，默认为项目的根目录
+  root-path: /
+  # 【！建议参数】包路径
+  package-path:
+  # 【！建议参数】模块名称
+  module-name:
+  # 控制层路径，默认情况 rootPath / packagePath / moduleName / controller
+  # 当控制层有值（用户指定路径），控制层路径为 rootPath / controllerPath
+  controller-path:
+  # 服务层路径，默认情况下是 rootPath / packagePath / moduleName / service
+  # 当服务层有值（用户指定路径），服务层路径为 rootPath / servicePath
+  service-path:
+  # 持久层路径，默认情况下是 rootPath / packagePath / moduleName / mapper
+  # 当持久层有值（用户指定路径），持久层路径为 rootPath / mapperPath
+  mapper-path:
+  # 实体层路径，默认情况下是 rootPath / packagePath / moduleName / domain
+  # 当实体层有值（用户指定路径），实体层路径为 rootPath / mapperPath
+  domain-path:
+  # 服务工厂类路径，默认情况下是 rootPath / packagePath / moduleName / factory
+  # 当服务工厂类有值（用户指定路径），实体层路径为 rootPath / factoryPath
+  factory-path:
+  # mybatis配置文件路径，默认情况下是 rootPath / src / main / resources / mapper /moduleName
+  # 当mybatis配置文件有值（用户指定路径），实体层路径为 rootPath / src / main / resources / xmlPath
+  xml-path:
+
+# 数据库的配置
+mybatis:
+  # 【！必须参数】数据库密码
+  password:
+  # 【！必须参数】数据库链接地址
+  url:
+  # 【！必须参数】数据库用户名
+  username:
