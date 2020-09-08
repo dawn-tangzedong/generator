@@ -16,6 +16,7 @@
   "text":"String",
   "mediumtext":"String",
   "longtext":"String",
+  "json": "String",
 
   "date":"Date",
   "datetime":"Date",
