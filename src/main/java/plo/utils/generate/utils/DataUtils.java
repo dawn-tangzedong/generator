@@ -65,7 +65,7 @@ public class DataUtils {
      * @return 转换后的结果
      */
     private static String convertName(String name, String[] prefixes) {
-        if (prefixes.length > 0) {
+        if (prefixes != null && prefixes.length > 0) {
             // 循环遍历，过滤掉 prefix
             for (String prefix : prefixes) {
                 name = name.replaceFirst(prefix, "");
